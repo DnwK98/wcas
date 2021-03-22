@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\User\Entity;
 
-use App\Repository\UserRepository;
+use App\Common\Doctrine\Uuid\UuidTrait;
+use App\User\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -12,33 +13,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private ?string $password;
 
     public function getEmail(): ?string
     {
