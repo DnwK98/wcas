@@ -3,6 +3,7 @@
 namespace App\User\Api;
 
 use App\Common\Form\FormValidator;
+use App\User\Api\Form\Login\LoginForm;
 use App\User\Entity\User;
 use App\User\Repository\UserRepository;
 use App\User\Api\Form\Register\RegisterForm;
@@ -41,7 +42,7 @@ class AuthController extends AbstractController
      */
     public function login(Request $request): JsonResponse
     {
-        $form = $this->createForm(RegisterForm::class);
+        $form = $this->createForm(LoginForm::class);
         $form->handleRequest($request);
         if($errors = FormValidator::validate($form)) {
             return new JsonResponse(['errors' => $errors], JsonResponse::HTTP_BAD_REQUEST);
@@ -79,7 +80,7 @@ class AuthController extends AbstractController
         $data = $form->getData();
 
         if($this->userRepository->findOneByEmail($data->email)){
-            return new JsonResponse(['errors' => 'Email already exists'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['errors' => ['email' => 'Email already exists']], JsonResponse::HTTP_CONFLICT);
         }
 
         $user = new User();
@@ -88,7 +89,10 @@ class AuthController extends AbstractController
 
         $this->userRepository->save($user);
 
-        return new JsonResponse(['status' => 'success']);
+        return new JsonResponse([
+            'status' => 'success',
+            'userId' => $user->getId()
+        ]);
     }
 
     /**
