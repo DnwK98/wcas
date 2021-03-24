@@ -1,4 +1,28 @@
 {
+    "amphp/amp": {
+        "version": "v2.5.2"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.8.0"
+    },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.5"
+    },
+    "dephpend/dephpend": {
+        "version": "0.7.0"
+    },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
+    },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.2.0"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "1.5.1"
+    },
     "lcobucci/clock": {
         "version": "1.4.0"
     },
@@ -23,6 +47,12 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
+    "netresearch/jsonmapper": {
+        "version": "v2.1.0"
+    },
+    "openlss/lib-array2xml": {
+        "version": "1.0.0"
+    },
     "phar-io/manifest": {
         "version": "2.0.1"
     },
@@ -40,6 +70,9 @@
     },
     "phpspec/prophecy": {
         "version": "1.13.0"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.82"
     },
     "phpunit/php-code-coverage": {
         "version": "9.2.5"
@@ -161,7 +194,13 @@
     "theseer/tokenizer": {
         "version": "1.2.0"
     },
+    "vimeo/psalm": {
+        "version": "4.6.4"
+    },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     }
 }
