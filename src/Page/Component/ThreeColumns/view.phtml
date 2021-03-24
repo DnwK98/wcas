@@ -1,0 +1,21 @@
+<?php
+use App\Page\Component\ThreeColumns\ThreeColumnsComponent;
+
+/**
+ * @var ThreeColumnsComponent $this
+ */
+?>
+
+<div class="col-xs-12">
+        <div class="row">
+            <div class="col-4">
+                <?= $this->column1->render() ?>
+            </div>
+            <div class="col-4">
+                <?= $this->column2->render() ?>
+            </div>
+            <div class="col-4">
+                <?= $this->column3->render() ?>
+            </div>
+        </div>
+</div>

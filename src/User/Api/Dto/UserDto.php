@@ -16,7 +16,7 @@ class UserDto implements JsonSerializable
         $dto = new self;
         $dto->id = (string)$user->getId();
         $dto->email = (string)$user->getEmail();
-        $dto->created = date('Y-m-d H:i:s', $user->getUuid()->getTime());
+        $dto->created = date('Y-m-d H:i:s', (int)$user->getUuid()->getTime());
 
         return $dto;
     }

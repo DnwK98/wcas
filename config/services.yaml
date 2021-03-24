@@ -26,6 +26,21 @@ services:
     App\User\Api\:
         resource: '../src/User/Api/'
         tags: ['controller.service_arguments']
+    App\Page\Api\:
+        resource: '../src/Page/Api/'
+        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Page
+    App\Page\PageBuilder:
+        class: App\Page\PageBuilder
+        public: true
+        autoconfigure: true
+        autowire: true
+    App\Page\Component\ComponentBuilderProvider:
+        class: App\Page\Component\ComponentBuilderProvider
+        public: true
+        autoconfigure: true
+        autowire: true

@@ -1,3 +1,6 @@
-controllers:
+user_api:
   resource: ../../src/User/Api/
+  type: annotation
+page_api:
+  resource: ../../src/Page/Api/
   type: annotation

@@ -6,8 +6,10 @@ namespace App\Common\JsonObject;
 
 use App\Common\JsonObject\Exception\JsonParseException;
 use DateTime;
+use Iterator;
+use JsonSerializable;
 
-class JsonObject implements \Iterator
+class JsonObject implements Iterator, JsonSerializable
 {
     private $data;
 
@@ -149,5 +151,10 @@ class JsonObject implements \Iterator
         }
 
         return $array;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->data;
     }
 }
