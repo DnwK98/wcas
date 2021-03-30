@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User;
 
 use App\User\Entity\User;
@@ -13,7 +15,7 @@ trait UserPermittedQuery
         $alias = end($aliases);
 
         if (!in_array(UserRoles::ADMINISTRATOR, $user->getRoles())) {
-            /* @psalm-suppress TooManyArguments */
+            /** @psalm-suppress TooManyArguments */
             $qb
                 ->andWhere($qb->expr()->orX(
                     $qb->expr()->eq("{$alias}.owner", ':owner'),

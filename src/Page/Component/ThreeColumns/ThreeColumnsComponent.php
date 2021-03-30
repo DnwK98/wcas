@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Page\Component\ThreeColumns;
 
 use App\Page\Component\AbstractComponent;
@@ -9,7 +11,7 @@ class ThreeColumnsComponent extends AbstractComponent
     const COLUMN_NAMES = [
         'column1',
         'column2',
-        'column3'
+        'column3',
     ];
 
     private AbstractComponent $column1;
@@ -25,7 +27,7 @@ class ThreeColumnsComponent extends AbstractComponent
 
     public function render(): string
     {
-        return $this->outputGet(function (){
+        return $this->outputGet(function () {
             require __DIR__ . '/view.phtml';
         });
     }

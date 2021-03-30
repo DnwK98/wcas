@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Page\Api;
-
 
 use App\Common\JsonObject\Exception\JsonParseException;
 use App\Common\JsonObject\JsonObject;
@@ -26,6 +26,7 @@ class PagePreviewController extends AbstractController
      * @Route("/api/page/preview", methods={"POST"})
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function preview(Request $request): Response
@@ -33,7 +34,7 @@ class PagePreviewController extends AbstractController
         $pageJson = null;
         try {
             $pageJson = JsonObject::ofJson($request->getContent());
-        } catch (JsonParseException $e){
+        } catch (JsonParseException $e) {
             return new JsonResponse(['status' => 'Bad Request'], JsonResponse::HTTP_BAD_REQUEST);
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Api;
 
 use App\Common\Api\ApiController;
@@ -44,7 +46,7 @@ class DomainController extends ApiController
         $domains = Collection::Collect($this->domainRepository->findForUser($this->getUser()));
 
         return new ObjectResponse($domains
-            ->map(function (Domain $domain){
+            ->map(function (Domain $domain) {
                 return DomainDto::fromEntity($domain);
             })
             ->toArray()
@@ -55,19 +57,20 @@ class DomainController extends ApiController
      * @Route("/api/domain", methods={"POST"})
      *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function addDomain(Request $request): JsonResponse
     {
         $form = $this->createForm(DomainForm::class);
         $form->handleRequest($request);
-        if($errors = FormValidator::validate($form)) {
+        if ($errors = FormValidator::validate($form)) {
             return new BadRequestResponse($errors);
         }
         /** @var DomainRequest $data */
         $data = $form->getData();
 
-        if(!$this->domainValidator->domainDoesNotOverlapsExistingOne($data->domain)){
+        if (!$this->domainValidator->domainDoesNotOverlapsExistingOne($data->domain)) {
             return new BadRequestResponse(['domain' => 'This domain is added already']);
         }
 

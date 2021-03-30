@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Domain;
-
 
 use App\Common\Doctrine\Collection\Collection;
 use App\Domain\Entity\Domain;
@@ -27,14 +27,14 @@ class DomainValidator
 
         $domains = $this->domainRepository->searchByMainDomain("{$mainDomain}.{$suffix}");
 
-        foreach ($domains as $foundDomain){
-            if($foundDomain->getDomain() === $domain){
+        foreach ($domains as $foundDomain) {
+            if ($foundDomain->getDomain() === $domain) {
                 return false;
             }
-            if(str_contains($foundDomain->getDomain(), "." . $domain)){
+            if (str_contains($foundDomain->getDomain(), '.' . $domain)) {
                 return false;
             }
-            if(str_contains($domain, "." . $foundDomain->getDomain())){
+            if (str_contains($domain, '.' . $foundDomain->getDomain())) {
                 return false;
             }
         }
@@ -45,7 +45,7 @@ class DomainValidator
     public function hasValidDomainForUser(string $url, User $user): bool
     {
         return Collection::Collect($this->domainRepository->findForUser($user))
-            ->exists(function (int $key, Domain $domain) use($url){
+            ->exists(function (int $key, Domain $domain) use ($url) {
                 return str_ends_with($url, $domain->getDomain());
             });
     }

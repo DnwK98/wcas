@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Api\Form\Login;
 
 use Symfony\Component\Form\AbstractType;
@@ -16,8 +18,8 @@ class LoginForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-       $builder->add('email', TextType::class);
-       $builder->add('password', TextType::class);
+        $builder->add('email', TextType::class);
+        $builder->add('password', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -27,5 +29,4 @@ class LoginForm extends AbstractType
             'csrf_protection' => false,
         ]);
     }
-
 }

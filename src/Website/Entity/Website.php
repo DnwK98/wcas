@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Website\Entity;
 
 use App\Common\Doctrine\Uuid\UuidTrait;

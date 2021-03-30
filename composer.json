@@ -74,6 +74,11 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "test:all": [
+            "@test",
+            "@test:psalm",
+            "@test:php-cs"
+        ],
         "test": [
             "@php bin/console --env=test cache:clear",
             "@php bin/console --env=test cache:warmup",
@@ -88,7 +93,8 @@
         ],
         "test:psalm" : "@php vendor/bin/psalm --threads=8 --no-cache",
         "test:psalm:fix" : "@php vendor/bin/psalm --alter --issues=MissingReturnType,MissingParamType --dry-run",
-        "test:php-cs" : "@php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --diff --stop-on-violation"
+        "test:php-cs" : "@php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --diff --stop-on-violation",
+        "test:php-cs:fix" : "@php vendor/bin/php-cs-fixer fix --using-cache=no --diff"
     },
     "conflict": {
         "symfony/symfony": "*"

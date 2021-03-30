@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Domain\Api\Form;
 
@@ -9,14 +10,14 @@ class DomainRequest
 {
     /**
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      * @Assert\Length(min=5)
      */
     public string $domain;
 
     /**
      * @return bool
-     * @Assert\IsTrue()
+     * @Assert\IsTrue
      */
     public function isDomainValid(): bool
     {

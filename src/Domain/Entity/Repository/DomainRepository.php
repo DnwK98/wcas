@@ -1,16 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Domain\Entity\Repository;
-
 
 use App\Domain\Entity\Domain;
 use App\User\Entity\User;
 use App\User\UserPermittedQuery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Domain>
@@ -43,11 +41,13 @@ class DomainRepository extends ServiceEntityRepository
 
     /**
      * @param string $value
+     *
      * @return Domain[]
      */
     public function searchByMainDomain(string $value): array
     {
         $qb = $this->createQueryBuilder('d');
+
         return $qb
             ->andWhere($qb->expr()->like('d.domain', $qb->expr()->literal("%$value")))
             ->getQuery()
@@ -58,6 +58,7 @@ class DomainRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('d');
         $this->restrictQueryBuilder($qb, $owner);
+
         return $qb
             ->getQuery()
             ->getResult();

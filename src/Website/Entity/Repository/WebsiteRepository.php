@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Website\Entity\Repository;
-
 
 use App\User\Entity\User;
 use App\User\UserPermittedQuery;
