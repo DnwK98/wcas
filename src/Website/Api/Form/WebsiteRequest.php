@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Website\Api\Form;
 
@@ -16,7 +17,7 @@ class WebsiteRequest
 
     /**
      * @return bool
-     * @Assert\IsTrue()
+     * @Assert\IsTrue
      */
     public function isValidUrl(): bool
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Common\Response;
 
 use JsonSerializable;
@@ -14,8 +16,7 @@ class ObjectResponse extends JsonResponse
     {
         parent::__construct([
             'status' => 200,
-            'data' => $data
+            'data' => $data,
         ]);
     }
-
 }

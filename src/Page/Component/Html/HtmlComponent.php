@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Page\Component\Html;
 
 use App\Page\Component\AbstractComponent;
@@ -22,7 +24,7 @@ class HtmlComponent extends AbstractComponent
     {
         return [
             'name' => 'HtmlComponent',
-            'content' => $this->content
+            'content' => $this->content,
         ];
     }
 }

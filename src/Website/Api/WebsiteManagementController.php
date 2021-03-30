@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Website\Api;
-
 
 use App\Common\Api\ApiController;
 use App\Common\Form\FormValidator;
@@ -39,24 +39,24 @@ class WebsiteManagementController extends ApiController
         return new ObjectResponse([]);
     }
 
-
     /**
      * @Route("/api/website", methods={"POST"})
      *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function addWebsite(Request $request): JsonResponse
     {
         $form = $this->createForm(WebsiteForm::class);
         $form->handleRequest($request);
-        if($errors = FormValidator::validate($form)) {
+        if ($errors = FormValidator::validate($form)) {
             return new BadRequestResponse($errors);
         }
         /** @var WebsiteRequest $data */
         $data = $form->getData();
 
-        if(!$this->domainValidator->hasValidDomainForUser($data->url, $this->getUser())){
+        if (!$this->domainValidator->hasValidDomainForUser($data->url, $this->getUser())) {
             return new BadRequestResponse(['url' => 'Url does not contain valid domain']);
         }
 

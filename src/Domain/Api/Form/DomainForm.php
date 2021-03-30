@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Api\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -26,5 +28,4 @@ class DomainForm extends AbstractType
             'csrf_protection' => false,
         ]);
     }
-
 }

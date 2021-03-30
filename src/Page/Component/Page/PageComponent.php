@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Page\Component\Page;
 
 use App\Common\Doctrine\Collection\Collection;
@@ -21,7 +23,7 @@ class PageComponent extends AbstractComponent
 
     public function render(): string
     {
-        return $this->outputGet(function (){
+        return $this->outputGet(function () {
             require __DIR__ . '/view.phtml';
         });
     }
@@ -34,7 +36,7 @@ class PageComponent extends AbstractComponent
                 ->map(function (AbstractComponent $component): array {
                     return $component->jsonSerialize();
                 })
-                ->toArray()
+                ->toArray(),
         ];
     }
 }

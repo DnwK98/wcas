@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Page\Component\None;
 
 use App\Page\Component\AbstractComponent;

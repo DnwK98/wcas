@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Common\Doctrine\Collection;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Collection extends ArrayCollection
 {
     /**
-     * Adds static factory for chaining methods
+     * Adds static factory for chaining methods.
      *
      * @param array $array
+     *
      * @return Collection
      */
     public static function Collect(array $array): Collection

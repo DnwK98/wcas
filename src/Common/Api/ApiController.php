@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Common\Api;
-
 
 use App\User\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +14,7 @@ class ApiController extends AbstractController
     {
         $user = parent::getUser();
 
-        if(!$user instanceof User){
+        if (!$user instanceof User) {
             throw new UnauthorizedHttpException('');
         }
 

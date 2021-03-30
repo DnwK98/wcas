@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Common\Doctrine\Uuid;
 
@@ -11,7 +12,7 @@ trait UuidTrait
     /**
      * @var ?string
      * @ORM\Column(name="id", type="string", length=36)
-     * @ORM\Id()
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator("App\Common\Doctrine\Uuid\UuidGenerator")
      */
