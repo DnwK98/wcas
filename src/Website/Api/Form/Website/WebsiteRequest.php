@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Website\Api\Form;
+namespace App\Website\Api\Form\Website;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +17,7 @@ class WebsiteRequest
 
     /**
      * @return bool
-     * @Assert\IsTrue
+     * @Assert\IsTrue(message="Url is not valid")
      */
     public function isValidUrl(): bool
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Common\Form;
 
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 
 class FormValidator
@@ -16,6 +17,9 @@ class FormValidator
         }
         if (!$form->isValid()) {
             foreach ($form->getErrors(true, false) as $a => $e) {
+                if ($e instanceof FormError) {
+                    $errors['general'] = $e->getMessage();
+                }
                 $errors[$e->getForm()->getName()] = $e->getChildren()->getMessage();
             }
         }
