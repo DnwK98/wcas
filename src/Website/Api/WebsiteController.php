@@ -11,15 +11,15 @@ use App\Common\Response\CreatedResponse;
 use App\Common\Response\ObjectResponse;
 use App\Domain\DomainValidator;
 use App\User\UserPermissionService;
-use App\Website\Api\Form\WebsiteForm;
-use App\Website\Api\Form\WebsiteRequest;
+use App\Website\Api\Form\Website\WebsiteForm;
+use App\Website\Api\Form\Website\WebsiteRequest;
 use App\Website\Entity\Repository\WebsiteRepository;
 use App\Website\Entity\Website;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class WebsiteManagementController extends ApiController
+class WebsiteController extends ApiController
 {
     private UserPermissionService $userPermission;
     private DomainValidator $domainValidator;
@@ -58,6 +58,9 @@ class WebsiteManagementController extends ApiController
 
         if (!$this->domainValidator->hasValidDomainForUser($data->url, $this->getUser())) {
             return new BadRequestResponse(['url' => 'Url does not contain valid domain']);
+        }
+        if ($this->websiteRepository->findByUrl($data->url)) {
+            return new BadRequestResponse(['url' => 'Website for this url already exists']);
         }
 
         $website = new Website();

@@ -17,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Website|null findOneBy(array $criteria, array $orderBy = null)
  * @method Website[]    findAll()
  * @method Website[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Website      findByUrl(string $url)
  *
  * @psalm-method list<Website>  findAll()
  * @psalm-method list<Website>  findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
