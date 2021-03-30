@@ -17,3 +17,15 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Entity'
                 prefix: 'App\User\Entity'
                 alias: App
+            App\Domain:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Domain/Entity'
+                prefix: 'App\Domain\Entity'
+                alias: App
+            App\Website:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Website/Entity'
+                prefix: 'App\Website\Entity'
+                alias: App

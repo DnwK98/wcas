@@ -5,7 +5,7 @@ namespace App\User\Api;
 use App\Common\Response\ForbiddenResponse;
 use App\User\Api\Dto\UserDto;
 use App\User\Entity\User;
-use App\User\Repository\UserRepository;
+use App\User\Entity\Repository\UserRepository;
 use App\User\UserPermissionService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

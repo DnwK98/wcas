@@ -3,13 +3,13 @@
 namespace App\User\Entity;
 
 use App\Common\Doctrine\Uuid\UuidTrait;
-use App\User\Repository\UserRepository;
+use App\User\Entity\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
+ * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
@@ -101,7 +101,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

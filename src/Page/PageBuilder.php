@@ -6,7 +6,7 @@ namespace App\Page;
 
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\ComponentBuilderProvider;
-use App\Page\Component\ComponentInterface;
+use App\Page\Component\AbstractComponent;
 
 class PageBuilder
 {
@@ -17,7 +17,7 @@ class PageBuilder
         $this->componentBuilderProvider = $componentBuilderProvider;
     }
 
-    public function build(JsonObject $jsonPage): ComponentInterface
+    public function build(JsonObject $jsonPage): AbstractComponent
     {
         $name = $jsonPage->getString('name');
 

@@ -1,6 +1,12 @@
-user_api:
-  resource: ../../src/User/Api/
+domain_api:
+  resource: ../../src/Domain/Api/
   type: annotation
 page_api:
   resource: ../../src/Page/Api/
+  type: annotation
+user_api:
+  resource: ../../src/User/Api/
+  type: annotation
+website_api:
+  resource: ../../src/Website/Api/
   type: annotation
