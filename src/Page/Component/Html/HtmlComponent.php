@@ -3,9 +3,8 @@
 namespace App\Page\Component\Html;
 
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentInterface;
 
-class HtmlComponent extends AbstractComponent implements ComponentInterface
+class HtmlComponent extends AbstractComponent
 {
     private string $content;
 
@@ -19,7 +18,7 @@ class HtmlComponent extends AbstractComponent implements ComponentInterface
         return $this->content;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => 'HtmlComponent',

@@ -5,7 +5,7 @@ namespace App\User\Api;
 use App\Common\Form\FormValidator;
 use App\User\Api\Form\Login\LoginForm;
 use App\User\Entity\User;
-use App\User\Repository\UserRepository;
+use App\User\Entity\Repository\UserRepository;
 use App\User\Api\Form\Register\RegisterForm;
 use App\User\Api\Form\Register\RegisterRequest;
 use Doctrine\ORM\EntityManagerInterface;

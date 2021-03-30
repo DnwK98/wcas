@@ -128,7 +128,7 @@ class JsonObject implements Iterator, JsonSerializable
         return false === $dateTime ? $default : $dateTime;
     }
 
-    public function isset(?string $offset = null)
+    public function isset(?string $offset = null): bool
     {
         $value = $this->get($offset);
 

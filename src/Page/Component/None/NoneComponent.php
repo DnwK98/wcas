@@ -3,16 +3,15 @@
 namespace App\Page\Component\None;
 
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentInterface;
 
-class NoneComponent extends AbstractComponent implements ComponentInterface
+class NoneComponent extends AbstractComponent
 {
     public function render(): string
     {
         return '';
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => 'NoneComponent',

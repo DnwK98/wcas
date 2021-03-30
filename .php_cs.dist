@@ -1,0 +1,24 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__ . '/src')
+    ->exclude('var');
+$config = new PhpCsFixer\Config();
+
+return $config
+    ->setFinder($finder)
+    ->setRiskyAllowed(false)
+    ->setRules([
+        '@PSR1' => true,
+        '@PSR2' => true,
+        '@Symfony' => true,
+        '@DoctrineAnnotation' => true,
+        'no_useless_return' => true,
+        'no_useless_else' => true,
+        'declare_strict_types' => true,
+        'no_superfluous_phpdoc_tags' => false,
+        'phpdoc_align' => false,
+        'cast_spaces' => false,
+        'concat_space' => false,
+    ])
+;

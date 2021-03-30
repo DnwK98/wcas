@@ -4,17 +4,16 @@ namespace App\Page\Component\Page;
 
 use App\Common\Doctrine\Collection\Collection;
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentInterface;
 
-class PageComponent extends AbstractComponent implements ComponentInterface
+class PageComponent extends AbstractComponent
 {
-    /** @var ComponentInterface[] */
+    /** @var AbstractComponent[] */
     private array $children;
 
     public function __construct(array $children)
     {
         $this->children = Collection::Collect($children)
-            ->map(function (ComponentInterface $component) {
+            ->map(function (AbstractComponent $component) {
                 return $component;
             })
             ->toArray();
@@ -27,12 +26,12 @@ class PageComponent extends AbstractComponent implements ComponentInterface
         });
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => 'PageComponent',
             'children' => Collection::Collect($this->children)
-                ->map(function (ComponentInterface $component): array {
+                ->map(function (AbstractComponent $component): array {
                     return $component->jsonSerialize();
                 })
                 ->toArray()

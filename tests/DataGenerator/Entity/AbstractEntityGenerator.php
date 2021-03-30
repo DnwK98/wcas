@@ -19,8 +19,14 @@ class AbstractEntityGenerator
         $this->dataGenerator = $dataGenerator;
     }
 
-    public function persistent()
+    public function persistent(): AbstractEntityGenerator
     {
         $this->em->persist($this->entity);
+        return $this;
+    }
+
+    public function get(): object
+    {
+        return $this->entity;
     }
 }

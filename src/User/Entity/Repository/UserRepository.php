@@ -1,6 +1,6 @@
 <?php
 
-namespace App\User\Repository;
+namespace App\User\Entity\Repository;
 
 use App\User\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -45,7 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findOneByEmail($value): ?User
+    public function findOneByEmail(string $value): ?User
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.email = :val')
@@ -54,7 +54,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
     }
 
-    public function save(User $user)
+    public function save(User $user): void
     {
         $this->_em->persist($user);
         $this->_em->flush();

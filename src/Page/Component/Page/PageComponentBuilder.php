@@ -5,13 +5,13 @@ namespace App\Page\Component\Page;
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\ComponentBuilderInterface;
 use App\Page\Component\ComponentBuilderProvider;
-use App\Page\Component\ComponentInterface;
+use App\Page\Component\AbstractComponent;
 
 class PageComponentBuilder implements ComponentBuilderInterface
 {
-    public function build(ComponentBuilderProvider $provider, JsonObject $json): ComponentInterface
+    public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent
     {
-        /** @var ComponentInterface[] $columns */
+        /** @var AbstractComponent[] $columns */
         $components = [];
         foreach ($json->getJson('children') as $child){
             $components[] = $provider

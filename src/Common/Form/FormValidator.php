@@ -2,6 +2,8 @@
 
 namespace App\Common\Form;
 
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -14,7 +16,7 @@ class FormValidator
             $form->submit([]);
         }
         if (!$form->isValid()) {
-            foreach ($form->getErrors(true, false) as $e){
+            foreach ($form->getErrors(true, false) as $a => $e){
                 $errors[$e->getForm()->getName()] = $e->getChildren()->getMessage();
             }
         }

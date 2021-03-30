@@ -15,6 +15,7 @@
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "jmose/command-scheduler-bundle": "^3.0",
         "lcobucci/jwt": "^4.1",
         "lexik/jwt-authentication-bundle": "^2.11",
         "phpunit/phpunit": "^9.5",
@@ -33,6 +34,7 @@
     },
     "require-dev": {
         "dephpend/dephpend": "^0.7.0",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "symfony/debug-bundle": "5.2.*",
         "symfony/maker-bundle": "^1.30",
         "symfony/stopwatch": "^5.2",
@@ -72,19 +74,28 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "test": "@php vendor/bin/phpunit -c phpunit.xml.dist",
-        "test:psalm" : "@php vendor/bin/psalm --threads=8 --no-cache",
+        "test": [
+            "@php bin/console --env=test cache:clear",
+            "@php bin/console --env=test cache:warmup",
+            "@php bin/console --env=test doctrine:database:drop --force --no-interaction",
+            "@php bin/console --env=test doctrine:database:create --no-interaction",
+            "@php bin/console --env=test doctrine:migrations:migrate --no-interaction",
+            "@php vendor/bin/phpunit -c phpunit.xml.dist"
+        ],
         "test:coverage": [
             "@putenv XDEBUG_MODE=coverage",
             "@php vendor/bin/phpunit --coverage-html public/coverage"
-        ]
+        ],
+        "test:psalm" : "@php vendor/bin/psalm --threads=8 --no-cache",
+        "test:psalm:fix" : "@php vendor/bin/psalm --alter --issues=MissingReturnType,MissingParamType --dry-run",
+        "test:php-cs" : "@php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --diff --stop-on-violation"
     },
     "conflict": {
         "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.2.*"
         }
     }

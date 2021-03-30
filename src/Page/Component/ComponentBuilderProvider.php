@@ -4,9 +4,7 @@ namespace App\Page\Component;
 
 use App\Page\Component\Html\HtmlComponentBuilder;
 use App\Page\Component\None\NoneComponentBuilder;
-use App\Page\Component\Page\PageComponent;
 use App\Page\Component\Page\PageComponentBuilder;
-use App\Page\Component\ThreeColumns\ThreeColumnsComponent;
 use App\Page\Component\ThreeColumns\ThreeColumnsComponentBuilder;
 
 class ComponentBuilderProvider

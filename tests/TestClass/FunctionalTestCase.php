@@ -56,13 +56,17 @@ class FunctionalTestCase extends WebTestCase
         return new TestRequest($this->client());
     }
 
-    protected function withUser(): void
+    protected function withUser(): User
     {
-        $this->dataGenerator->user()
+        /** @var User $user */
+        $user = $this->dataGenerator->user()
             ->withEmail('test@example.com')
             ->withTestPassword()
-            ->persistent();
+            ->persistent()
+            ->get();
         $this->em->flush();
+
+        return $user;
     }
 
     protected function jwtToken(string $userEmail = 'test@example.com'): string

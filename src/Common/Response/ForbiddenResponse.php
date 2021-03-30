@@ -11,7 +11,7 @@ class ForbiddenResponse extends JsonResponse
     {
         parent::__construct([
             'status' => 403,
-            'message' => 'You don\' have permission to visit this site'
+            'message' => 'You don\'t have permission to visit this site'
         ], self::HTTP_FORBIDDEN);
     }
 

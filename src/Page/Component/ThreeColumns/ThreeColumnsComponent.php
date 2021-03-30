@@ -3,9 +3,8 @@
 namespace App\Page\Component\ThreeColumns;
 
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentInterface;
 
-class ThreeColumnsComponent extends AbstractComponent implements ComponentInterface
+class ThreeColumnsComponent extends AbstractComponent
 {
     const COLUMN_NAMES = [
         'column1',
@@ -13,11 +12,11 @@ class ThreeColumnsComponent extends AbstractComponent implements ComponentInterf
         'column3'
     ];
 
-    private ComponentInterface $column1;
-    private ComponentInterface $column2;
-    private ComponentInterface $column3;
+    private AbstractComponent $column1;
+    private AbstractComponent $column2;
+    private AbstractComponent $column3;
 
-    public function __construct(ComponentInterface $column1, ComponentInterface $column2, ComponentInterface $column3)
+    public function __construct(AbstractComponent $column1, AbstractComponent $column2, AbstractComponent $column3)
     {
         $this->column1 = $column1;
         $this->column2 = $column2;
@@ -31,7 +30,7 @@ class ThreeColumnsComponent extends AbstractComponent implements ComponentInterf
         });
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => 'ThreeColumnsComponent',

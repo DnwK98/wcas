@@ -8,7 +8,10 @@ use App\User\Entity\User;
 use App\User\UserRoles;
 use Doctrine\ORM\EntityManagerInterface;
 
-/** @property User $entity */
+/**
+ * @property User $entity
+ * @method User get()
+ */
 class UserGenerator extends AbstractEntityGenerator
 {
 
