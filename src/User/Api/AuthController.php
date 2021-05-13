@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User\Api;
 
 use App\Common\Form\FormValidator;
+use App\Common\Response\UnauthorizedResponse;
 use App\User\Api\Form\Login\LoginForm;
 use App\User\Api\Form\Register\RegisterForm;
 use App\User\Api\Form\Register\RegisterRequest;
@@ -53,10 +54,10 @@ class AuthController extends AbstractController
         $data = $form->getData();
 
         if (!$user = $this->userRepository->findOneByEmail($data->email)) {
-            return new JsonResponse(['error' => 'Invalid email'], JsonResponse::HTTP_UNAUTHORIZED);
+            return new UnauthorizedResponse(['email' => 'Invalid email']);
         }
         if (!$this->passwordEncoder->isPasswordValid($user, $data->password)) {
-            return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
+            return new UnauthorizedResponse(['password' => 'Invalid password']);
         }
 
         return new JsonResponse([

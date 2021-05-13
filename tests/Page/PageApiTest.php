@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Page;
 
 use App\Tests\TestClass\FunctionalTestCase;
@@ -18,7 +20,7 @@ class PageApiTest extends FunctionalTestCase
                 'children' => [
                     ['name' => 'NoneComponent'],
                     ['name' => 'NoneComponent'],
-                ]
+                ],
             ])
             ->getResponse();
 

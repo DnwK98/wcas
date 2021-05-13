@@ -15,13 +15,15 @@ class PageComponentBuilder implements ComponentBuilderInterface
     {
         /** @var AbstractComponent[] $columns */
         $components = [];
+        // TODO background color string sanitization
+        $backgroundColor = $json->getString('backgroundColor', '#ffffff');
         foreach ($json->getJson('children') as $child) {
             $components[] = $provider
                 ->provide($child->getString('name'))
                 ->build($provider, $child);
         }
 
-        return new PageComponent($components);
+        return new PageComponent($components, $backgroundColor);
     }
 
     public function getComponentName(): string

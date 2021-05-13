@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace App\Website\Api;
 
 use App\Common\Api\ApiController;
+use App\Common\Doctrine\Collection\Collection;
 use App\Common\Form\FormValidator;
 use App\Common\Response\BadRequestResponse;
 use App\Common\Response\CreatedResponse;
+use App\Common\Response\ForbiddenResponse;
+use App\Common\Response\NotFoundResponse;
 use App\Common\Response\ObjectResponse;
 use App\Domain\DomainValidator;
 use App\User\UserPermissionService;
+use App\Website\Api\Dto\WebsiteDetailsDto;
+use App\Website\Api\Dto\WebsiteDto;
 use App\Website\Api\Form\Website\WebsiteForm;
 use App\Website\Api\Form\Website\WebsiteRequest;
 use App\Website\Entity\Repository\WebsiteRepository;
@@ -34,9 +39,42 @@ class WebsiteController extends ApiController
         $this->websiteRepository = $websiteRepository;
     }
 
+    /**
+     * @Route("/api/website", methods={"GET"})
+     *
+     * @return JsonResponse
+     */
     public function getList(): JsonResponse
     {
-        return new ObjectResponse([]);
+        $websites = Collection::Collect($this->websiteRepository->findForUser($this->getUser()));
+
+        return new ObjectResponse($websites
+            ->map(function (Website $website) {
+                return WebsiteDto::fromEntity($website);
+            })
+            ->toArray()
+        );
+    }
+
+    /**
+     * @Route("/api/website/{id}", methods={"GET"})
+     *
+     * @param string $id
+     *
+     * @return JsonResponse
+     */
+    public function getDetails(string $id): JsonResponse
+    {
+        $website = $this->websiteRepository->find($id);
+        if (!$website) {
+            return new NotFoundResponse();
+        }
+
+        if (!$this->userPermission->hasAccessToObject($this->getUser(), $website->getOwner())) {
+            return new ForbiddenResponse();
+        }
+
+        return new ObjectResponse(WebsiteDetailsDto::fromEntity($website));
     }
 
     /**

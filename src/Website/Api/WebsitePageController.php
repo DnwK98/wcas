@@ -16,6 +16,7 @@ use App\Common\Response\ObjectResponse;
 use App\Common\Response\OkResponse;
 use App\Page\PageBuilder;
 use App\User\UserPermissionService;
+use App\Website\Api\Dto\WebsitePageDetailsDto;
 use App\Website\Api\Dto\WebsitePageDto;
 use App\Website\Api\Form\WebsitePage\WebsitePageForm;
 use App\Website\Api\Form\WebsitePage\WebsitePageRequest;
@@ -63,7 +64,7 @@ class WebsitePageController extends ApiController
             return new NotFoundResponse();
         }
 
-        return new ObjectResponse(WebsitePageDto::fromEntity($page));
+        return new ObjectResponse(WebsitePageDetailsDto::fromEntity($page));
     }
 
     /**

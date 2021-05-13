@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Page;
-
 
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\None\NoneComponent;
@@ -29,7 +29,7 @@ class PageBuilderTest extends FunctionalTestCase
             'children' => [
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
-            ]
+            ],
         ]);
 
         $builtPage = $this->pageBuilder->build($json);
@@ -44,7 +44,7 @@ class PageBuilderTest extends FunctionalTestCase
             'children' => [
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
-            ]
+            ],
         ]);
 
         $builtPage = $this->pageBuilder->build($json);
@@ -56,10 +56,11 @@ class PageBuilderTest extends FunctionalTestCase
     {
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
+            'backgroundColor' => '#bbbbbb',
             'children' => [
                 ['name' => 'InvalidName'],
                 ['name' => 'NoneComponent'],
-            ]
+            ],
         ]);
 
         $builtPage = $this->pageBuilder->build($json);
@@ -71,6 +72,7 @@ class PageBuilderTest extends FunctionalTestCase
     {
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
+            'backgroundColor' => '#bbbbbb',
             'children' => [
                 ['name' => 'HtmlComponent', 'content' => 'test html'],
                 ['name' => 'NoneComponent'],
@@ -81,7 +83,7 @@ class PageBuilderTest extends FunctionalTestCase
                     'column3' => ['name' => 'HtmlComponent', 'content' => 'other test html'],
                 ],
                 ['name' => 'NoneComponent'],
-            ]
+            ],
         ]);
 
         $builtPage = $this->pageBuilder->build($json);

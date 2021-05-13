@@ -15,6 +15,6 @@ class NotFoundResponse extends JsonResponse
         parent::__construct([
             'status' => self::STATUS,
             'message' => 'Resource not found',
-        ], self::HTTP_BAD_REQUEST);
+        ], self::HTTP_NOT_FOUND);
     }
 }
