@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Domain;
-
 
 use App\Common\JsonObject\JsonObject;
 use App\Common\Response\BadRequestResponse;
@@ -11,7 +11,6 @@ use App\Tests\TestClass\FunctionalTestCase;
 
 class DomainApiTest extends FunctionalTestCase
 {
-
     public function testGetDomainList()
     {
         $user = $this->dataGenerator->user()->persistent()->get();
@@ -28,6 +27,7 @@ class DomainApiTest extends FunctionalTestCase
 
         $this->assertCount(2, $json->getArray('data'));
     }
+
     public function testAddDomainWhichIsLikeExistingOne()
     {
         $this->checkDomainRequestResponse(

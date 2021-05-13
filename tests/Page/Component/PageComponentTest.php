@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Page\Component;
 
@@ -42,9 +43,9 @@ class PageComponentTest extends FunctionalTestCase
                 ['name' => 'NoneComponent'],
                 [
                     'name' => 'HtmlComponent',
-                    'content' => '<html></html>'
-                ]
-            ]
+                    'content' => '<html></html>',
+                ],
+            ],
         ]);
 
         $component = $this->provider
@@ -58,13 +59,14 @@ class PageComponentTest extends FunctionalTestCase
     {
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
+            'backgroundColor' => '#cccccc',
             'children' => [
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],
-            ]
+            ],
         ]);
 
         $component = $this->provider

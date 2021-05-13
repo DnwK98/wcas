@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Page\Component;
 
+use App\Page\Component\BackgroundImage\BackgroundImageComponentBuilder;
 use App\Page\Component\Html\HtmlComponentBuilder;
 use App\Page\Component\None\NoneComponentBuilder;
 use App\Page\Component\Page\PageComponentBuilder;
@@ -19,7 +20,8 @@ class ComponentBuilderProvider
     public function __construct(PageComponentBuilder $pageComponentBuilder,
                                 HtmlComponentBuilder $htmlComponentBuilder,
                                 ThreeColumnsComponentBuilder $threeColumnsComponent,
-                                NoneComponentBuilder $noneComponentBuilder)
+                                NoneComponentBuilder $noneComponentBuilder,
+                                BackgroundImageComponentBuilder $backgroundImageComponentBuilder)
     {
         $this->noneBuilder = $noneComponentBuilder;
 

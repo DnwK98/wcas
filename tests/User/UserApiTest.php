@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\User;
-
 
 use App\Common\JsonObject\JsonObject;
 use App\Tests\TestClass\FunctionalTestCase;
@@ -17,7 +17,7 @@ class UserApiTest extends FunctionalTestCase
             ->uri('/api/auth/register')
             ->parameters([
                 'email' => 'test@example.com',
-                'password' => 'test-password'
+                'password' => 'test-password',
             ])
             ->getResponse()
         );
@@ -36,7 +36,7 @@ class UserApiTest extends FunctionalTestCase
             ->uri('/api/auth/register')
             ->parameters([
                 'email' => 'invalid email',
-                'password' => 'short'
+                'password' => 'short',
             ])
             ->getResponse()
         );
@@ -54,7 +54,7 @@ class UserApiTest extends FunctionalTestCase
             ->uri('/api/auth/login')
             ->parameters([
                 'email' => 'test@example.com',
-                'password' => 'password'
+                'password' => 'password',
             ])
             ->getResponse()
         );
@@ -87,7 +87,6 @@ class UserApiTest extends FunctionalTestCase
         $this->assertTrue($response->isset('id'));
         $this->assertTrue($response->isset('email'));
         $this->assertTrue($response->isset('created'));
-
     }
 
     public function testUserList()
@@ -105,7 +104,7 @@ class UserApiTest extends FunctionalTestCase
             ->getResponse()
         );
 
-        foreach ($response as $userObject){
+        foreach ($response as $userObject) {
             $this->assertTrue($userObject->isset('id'));
             $this->assertTrue($userObject->isset('email'));
             $this->assertTrue($userObject->isset('created'));
