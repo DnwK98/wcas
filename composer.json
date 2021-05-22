@@ -1,5 +1,5 @@
 {
-    "name": "dnwk/tusi",
+    "name": "dnwk/wcas",
     "description": "",
     "type": "project",
     "license": "proprietary",
@@ -83,7 +83,7 @@
         "test": [
             "@php bin/console --env=test cache:clear",
             "@php bin/console --env=test cache:warmup",
-            "@php bin/console --env=test doctrine:database:drop --force --no-interaction",
+            "@php bin/console --env=test doctrine:database:drop --force --no-interaction --if-exists",
             "@php bin/console --env=test doctrine:database:create --no-interaction",
             "@php bin/console --env=test doctrine:migrations:migrate --no-interaction",
             "@php vendor/bin/phpunit -c phpunit.xml.dist"
