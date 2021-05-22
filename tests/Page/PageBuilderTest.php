@@ -73,6 +73,7 @@ class PageBuilderTest extends FunctionalTestCase
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
             'backgroundColor' => '#bbbbbb',
+            'textColor' => '#000001',
             'children' => [
                 ['name' => 'HtmlComponent', 'content' => 'test html'],
                 ['name' => 'NoneComponent'],

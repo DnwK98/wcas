@@ -1,0 +1,21 @@
+<?php declare(strict_types=1);
+
+use App\Page\Component\Margins\MarginsComponent;
+
+/**
+ * @var MarginsComponent $this
+ * @var string $contentClass
+ * @var string $marginLeftRightClass
+ * @var string $marginTopStyle
+ * @var string $marginBottomStyle
+ */
+?>
+<div class="row">
+    <div style="<?php echo $marginTopStyle; ?>"></div>
+    <div class="<?php echo $marginLeftRightClass; ?>"></div>
+    <div class="<?php echo $contentClass; ?>">
+        <?php echo $this->content->render(); ?>
+    </div>
+    <div class="<?php echo $marginLeftRightClass; ?>"></div>
+    <div style="<?php echo $marginBottomStyle; ?>"></div>
+</div>

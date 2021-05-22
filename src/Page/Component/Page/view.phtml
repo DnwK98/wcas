@@ -6,6 +6,7 @@ use App\Page\Component\Page\PageComponent;
 
 /**
  * @var PageComponent $this
+ * @psalm-suppress all
  */
 ?>
 
@@ -24,7 +25,8 @@ use App\Page\Component\Page\PageComponent;
     <title>Hello, world!</title>
     <style>
         body {
-            background-color: <?= $this->backgroundColor ?>;
+            background-color: <?php echo $this->backgroundColor; ?>;
+            color: <?php echo $this->textColor; ?>;
         }
     </style>
 </head>
