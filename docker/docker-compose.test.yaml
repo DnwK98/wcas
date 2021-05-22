@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  wcas-test:
+    image: wcas-local
+    container_name: "${APP_CONTAINER_NAME}_test"
+    command: /docker_entrypoint.sh test
+
+  wcas-mysql:
+    image: mysql:8.0
+    container_name: "${APP_CONTAINER_NAME}_test_mysql"
+    environment:
+      MYSQL_USER: wcas
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: wcas_test_db
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    tmpfs:
+      - /var/lib/mysql

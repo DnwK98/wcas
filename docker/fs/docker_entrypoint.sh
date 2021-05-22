@@ -9,6 +9,7 @@ main() {
 
   [ "$app_type" == "web" ] && run_web
   [ "$app_type" == "scheduler" ] && run_scheduler
+  [ "$app_type" == "test" ] && run_test
   [ "$app_type" == "maintainer" ] && run_maintainer
 }
 
@@ -17,7 +18,6 @@ set_dockerhost_ip() {
   printf "\n$DOCKERHOST_IP dockerhost\n" > /etc/hosts
   echo "dockerhost: $DOCKERHOST_IP"
 }
-
 
 create_framework_directories() {
   mkdir -p var/log
@@ -29,7 +29,6 @@ migrate_database() {
   php bin/console --env=prod mysql:wait
   php bin/console --env=prod doctrine:migrations:migrate --no-interaction
 }
-
 
 clear_cache() {
   php bin/console --env=dev cache:clear
@@ -49,6 +48,13 @@ run_web() {
 run_scheduler() {
   migrate_database
   php bin/console --env=prod scheduler:run
+}
+
+run_test() {
+  php bin/console --env=test mysql:wait
+
+  composer test:all || exit 1
+  exit 0
 }
 
 run_maintainer() {

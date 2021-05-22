@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 class WaitForMySqlCommand extends Command
 {
@@ -37,7 +38,7 @@ class WaitForMySqlCommand extends Command
                 $this->em->getConnection()->executeQuery('SELECT VERSION()')->fetchAllAssociative();
 
                 return 0;
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 $lastError = $e;
                 sleep(1);
                 $output->writeln("Wait for mysql $i / $timeout ...");
