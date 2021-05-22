@@ -6,6 +6,7 @@ namespace App\Page\Component;
 
 use App\Page\Component\BackgroundImage\BackgroundImageComponentBuilder;
 use App\Page\Component\Html\HtmlComponentBuilder;
+use App\Page\Component\Margins\MarginsComponentBuilder;
 use App\Page\Component\None\NoneComponentBuilder;
 use App\Page\Component\Page\PageComponentBuilder;
 use App\Page\Component\ThreeColumns\ThreeColumnsComponentBuilder;
@@ -21,7 +22,8 @@ class ComponentBuilderProvider
                                 HtmlComponentBuilder $htmlComponentBuilder,
                                 ThreeColumnsComponentBuilder $threeColumnsComponent,
                                 NoneComponentBuilder $noneComponentBuilder,
-                                BackgroundImageComponentBuilder $backgroundImageComponentBuilder)
+                                BackgroundImageComponentBuilder $backgroundImageComponentBuilder,
+                                MarginsComponentBuilder $marginsComponentBuilder)
     {
         $this->noneBuilder = $noneComponentBuilder;
 
