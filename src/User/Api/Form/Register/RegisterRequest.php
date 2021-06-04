@@ -21,4 +21,19 @@ class RegisterRequest
      * @Assert\NotBlank
      */
     public string $password;
+
+    /**
+     * @var string
+     * @Assert\Length(min="8")
+     * @Assert\NotBlank
+     */
+    public string $passwordVerify;
+
+    /**
+     * @Assert\IsTrue (message="Passwords must be equals", groups="passwordVerify")
+     */
+    public function isVerifiedPasswordEqualsToPassword()
+    {
+        return $this->password === $this->passwordVerify;
+    }
 }

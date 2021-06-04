@@ -7,6 +7,7 @@ namespace App\Website\Entity;
 use App\Common\Doctrine\Uuid\UuidTrait;
 use App\User\Entity\User;
 use App\Website\Entity\Repository\WebsiteRepository;
+use App\Website\StatusEnum;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Website
 {
+    const INDEX_PATH = 'index';
+
     use UuidTrait;
 
     /**
@@ -28,6 +31,11 @@ class Website
      * @ORM\Column(type="text", length=128)
      */
     private string $url;
+
+    /**
+     * @ORM\Column(type="text", length=32)
+     */
+    private string $status = StatusEnum::ACTIVE;
 
     /**
      * @var Collection|WebsitePage[]
@@ -63,6 +71,20 @@ class Website
     public function setUrl(string $url): void
     {
         $this->url = $url;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        if(!in_array($status, StatusEnum::list())){
+            throw new \LogicException('Invalid status');
+        }
+
+        $this->status = $status;
     }
 
     /**
@@ -105,5 +127,20 @@ class Website
         }
 
         return null;
+    }
+
+    public function getIndex()
+    {
+        foreach ($this->pages as $p) {
+            if ($p->getPath() === self::INDEX_PATH) {
+                return $p;
+            }
+        }
+
+        $indexPage = new WebsitePage();
+        $indexPage->setPath(self::INDEX_PATH);
+        $this->addPage($indexPage);
+
+        return $indexPage;
     }
 }

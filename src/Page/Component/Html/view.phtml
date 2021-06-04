@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+use App\Page\Component\Html\HtmlComponent;
+
+/**
+ * @var HtmlComponent $this
+ */
+?>
+<div class="row">
+    <div class="col-12 <?php echo $this->getTextAlignClass() ?>">
+<!--        <div class="row ">-->
+            <?php echo $this->content; ?>
+<!--        </div>-->
+    </div>
+</div>

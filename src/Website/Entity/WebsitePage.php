@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Website\Entity;
 
 use App\Common\Doctrine\Uuid\UuidTrait;
+use App\Website\StatusEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,11 @@ class WebsitePage
      * @ORM\Column(type="string", length=64)
      */
     private string $path;
+
+    /**
+     * @ORM\Column(type="text", length=32)
+     */
+    private string $status = StatusEnum::ACTIVE;
 
     /**
      * @ORM\Column(type="json")
@@ -60,5 +66,19 @@ class WebsitePage
     public function getWebsite(): Website
     {
         return $this->website;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        if(!in_array($status, StatusEnum::list())){
+            throw new \LogicException('Invalid status');
+        }
+
+        $this->status = $status;
     }
 }
