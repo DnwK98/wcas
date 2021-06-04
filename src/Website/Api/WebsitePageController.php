@@ -18,6 +18,8 @@ use App\Page\PageBuilder;
 use App\User\UserPermissionService;
 use App\Website\Api\Dto\WebsitePageDetailsDto;
 use App\Website\Api\Dto\WebsitePageDto;
+use App\Website\Api\Form\Status\StatusForm;
+use App\Website\Api\Form\Status\StatusRequest;
 use App\Website\Api\Form\WebsitePage\WebsitePageForm;
 use App\Website\Api\Form\WebsitePage\WebsitePageRequest;
 use App\Website\Entity\Repository\WebsiteRepository;
@@ -158,6 +160,47 @@ class WebsitePageController extends ApiController
         }
 
         $this->modifyPage($page, $data);
+        $this->websiteRepository->save($website);
+
+        return new OkResponse();
+    }
+
+    /**
+     * @Route("/api/website/{websiteId}/page/{pageId}", methods={"GET"})
+     *
+     * @param Request $request
+     * @param string $websiteId
+     * @param string $pageId
+     *
+     * @return JsonResponse
+     */
+    public function setPageStatus(Request $request, string $websiteId, string $pageId): JsonResponse
+    {
+        $eitherWebsiteResponse = $this->getWebsite($websiteId);
+        if ($eitherWebsiteResponse->response) {
+            return $eitherWebsiteResponse->response;
+        }
+        /** @var Website $website */
+        $website = $eitherWebsiteResponse->getObject();
+
+        $form = $this->createForm(StatusForm::class);
+        $form->handleRequest($request);
+        if ($errors = FormValidator::validate($form)) {
+            return new BadRequestResponse($errors);
+        }
+        /** @var StatusRequest $data */
+        $data = $form->getData();
+
+        $page = $website->getPageById($websiteId);
+        if (!$page) {
+            return new NotFoundResponse();
+        }
+
+        if (!$this->userPermission->hasAccessToObject($this->getUser(), $website->getOwner())) {
+            return new ForbiddenResponse();
+        }
+
+        $page->setStatus($data->status);
         $this->websiteRepository->save($website);
 
         return new OkResponse();

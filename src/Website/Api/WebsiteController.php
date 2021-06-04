@@ -12,10 +12,13 @@ use App\Common\Response\CreatedResponse;
 use App\Common\Response\ForbiddenResponse;
 use App\Common\Response\NotFoundResponse;
 use App\Common\Response\ObjectResponse;
+use App\Common\Response\OkResponse;
 use App\Domain\DomainValidator;
 use App\User\UserPermissionService;
 use App\Website\Api\Dto\WebsiteDetailsDto;
 use App\Website\Api\Dto\WebsiteDto;
+use App\Website\Api\Form\Status\StatusForm;
+use App\Website\Api\Form\Status\StatusRequest;
 use App\Website\Api\Form\Website\WebsiteForm;
 use App\Website\Api\Form\Website\WebsiteRequest;
 use App\Website\Entity\Repository\WebsiteRepository;
@@ -107,5 +110,61 @@ class WebsiteController extends ApiController
         $this->websiteRepository->save($website);
 
         return new CreatedResponse($website->getId());
+    }
+
+    /**
+     * @Route("/api/website/{id}", methods={"GET"})
+     *
+     * @param string $id
+     *
+     * @return JsonResponse
+     */
+    public function deleteWebsite(string $id): JsonResponse
+    {
+        $website = $this->websiteRepository->find($id);
+        if (!$website) {
+            return new NotFoundResponse();
+        }
+
+        if (!$this->userPermission->hasAccessToObject($this->getUser(), $website->getOwner())) {
+            return new ForbiddenResponse();
+        }
+
+        $this->websiteRepository->delete($website);
+
+        return new OkResponse();
+    }
+
+    /**
+     * @Route("/api/website/{id}/status", methods={"GET"})
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return JsonResponse
+     */
+    public function setWebsiteStatus(Request $request, string $id): JsonResponse
+    {
+        $form = $this->createForm(StatusForm::class);
+        $form->handleRequest($request);
+        if ($errors = FormValidator::validate($form)) {
+            return new BadRequestResponse($errors);
+        }
+        /** @var StatusRequest $data */
+        $data = $form->getData();
+
+        $website = $this->websiteRepository->find($id);
+        if (!$website) {
+            return new NotFoundResponse();
+        }
+
+        if (!$this->userPermission->hasAccessToObject($this->getUser(), $website->getOwner())) {
+            return new ForbiddenResponse();
+        }
+
+        $website->setStatus($data->status);
+        $this->websiteRepository->save($website);
+
+        return new OkResponse();
     }
 }

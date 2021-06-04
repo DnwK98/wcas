@@ -10,7 +10,7 @@ class WebsitePageRequest
 {
     /**
      * @var ?string
-     * @Assert\Length(min=5)
+     * @Assert\Length(min=3)
      * @Assert\NotBlank
      */
     public ?string $path = null;

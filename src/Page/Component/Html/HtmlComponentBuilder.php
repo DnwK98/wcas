@@ -13,7 +13,10 @@ class HtmlComponentBuilder implements ComponentBuilderInterface
 {
     public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent
     {
-        return new HtmlComponent($json->getString('content', ''));
+        $component =  new HtmlComponent($json->getString('content', ''));
+        $component->setTextAlign($json->getString('textAlign', ''));
+
+        return $component;
     }
 
     public function getComponentName(): string

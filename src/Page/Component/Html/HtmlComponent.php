@@ -9,6 +9,7 @@ use App\Page\Component\AbstractComponent;
 class HtmlComponent extends AbstractComponent
 {
     private string $content;
+    private string $textAlign = 'left';
 
     public function __construct(string $content)
     {
@@ -17,7 +18,28 @@ class HtmlComponent extends AbstractComponent
 
     public function render(): string
     {
-        return $this->content;
+        return $this->outputGet(function () {
+            require __DIR__ . '/view.phtml';
+        });
+    }
+
+    public function getTextAlignClass(): string
+    {
+        switch ($this->textAlign) {
+            case 'center':
+                return "text-center";
+            case 'right':
+                return "text-end";
+            case 'justify':
+                return "text-justify";
+            default:
+                return "";
+        }
+    }
+
+    public function setTextAlign(string $textAlign): void
+    {
+        $this->textAlign = $textAlign;
     }
 
     public function jsonSerialize(): array
@@ -25,6 +47,7 @@ class HtmlComponent extends AbstractComponent
         return [
             'name' => 'HtmlComponent',
             'content' => $this->content,
+            'textAlign' => $this->textAlign
         ];
     }
 }

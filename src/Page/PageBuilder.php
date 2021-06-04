@@ -25,4 +25,12 @@ class PageBuilder
             ->provide($name)
             ->build($this->componentBuilderProvider, $jsonPage);
     }
+
+    public function buildEmptyPage(): AbstractComponent
+    {
+        return $this->componentBuilderProvider->provide('PageComponent')->build(
+            $this->componentBuilderProvider,
+            JsonObject::ofArray([])
+        );
+    }
 }

@@ -44,4 +44,10 @@ class WebsiteRepository extends ServiceEntityRepository
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+    public function delete(Website $website)
+    {
+        $this->_em->remove($website);
+        $this->_em->flush();
+    }
 }
