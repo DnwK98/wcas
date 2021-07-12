@@ -166,7 +166,7 @@ class WebsitePageController extends ApiController
     }
 
     /**
-     * @Route("/api/website/{websiteId}/page/{pageId}", methods={"GET"})
+     * @Route("/api/website/{websiteId}/page/{pageId}/status", methods={"POST"})
      *
      * @param Request $request
      * @param string $websiteId
@@ -191,16 +191,41 @@ class WebsitePageController extends ApiController
         /** @var StatusRequest $data */
         $data = $form->getData();
 
-        $page = $website->getPageById($websiteId);
+        $page = $website->getPageById($pageId);
         if (!$page) {
             return new NotFoundResponse();
         }
 
-        if (!$this->userPermission->hasAccessToObject($this->getUser(), $website->getOwner())) {
-            return new ForbiddenResponse();
+        $page->setStatus($data->status);
+        $this->websiteRepository->save($website);
+
+        return new OkResponse();
+    }
+
+    /**
+     * @Route("/api/website/{websiteId}/page/{pageId}", methods={"DELETE"})
+     *
+     * @param Request $request
+     * @param string $websiteId
+     * @param string $pageId
+     *
+     * @return JsonResponse
+     */
+    public function deletePage(Request $request, string $websiteId, string $pageId): JsonResponse
+    {
+        $eitherWebsiteResponse = $this->getWebsite($websiteId);
+        if ($eitherWebsiteResponse->response) {
+            return $eitherWebsiteResponse->response;
+        }
+        /** @var Website $website */
+        $website = $eitherWebsiteResponse->getObject();
+
+        $page = $website->getPageById($pageId);
+        if (!$page) {
+            return new NotFoundResponse();
         }
 
-        $page->setStatus($data->status);
+        $website->removePage($page);
         $this->websiteRepository->save($website);
 
         return new OkResponse();

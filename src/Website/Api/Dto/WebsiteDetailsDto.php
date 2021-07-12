@@ -12,6 +12,7 @@ class WebsiteDetailsDto implements JsonSerializable
 {
     public string $id;
     public string $url;
+    public string $status;
     public string $created;
 
     /** @var WebsitePageDto[] */
@@ -22,6 +23,7 @@ class WebsiteDetailsDto implements JsonSerializable
         $dto = new self();
         $dto->id = (string)$website->getId();
         $dto->url = $website->getUrl();
+        $dto->status = $website->getStatus();
         $dto->created = date('Y-m-d H:i:s', (int)$website->getUuid()->getTime());
         $dto->pages = $website->getPages()
             ->map(function (WebsitePage $page) {

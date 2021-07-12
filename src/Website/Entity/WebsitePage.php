@@ -75,7 +75,7 @@ class WebsitePage
 
     public function setStatus(string $status): void
     {
-        if(!in_array($status, StatusEnum::list())){
+        if (!in_array($status, StatusEnum::list())) {
             throw new \LogicException('Invalid status');
         }
 

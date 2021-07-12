@@ -11,6 +11,7 @@ class WebsitePageDetailsDto implements JsonSerializable
 {
     public string $id;
     public string $path;
+    public string $status;
     public array $definition;
     public string $created;
 
@@ -19,6 +20,7 @@ class WebsitePageDetailsDto implements JsonSerializable
         $dto = new self();
         $dto->id = (string)$page->getId();
         $dto->path = $page->getPath();
+        $dto->status = $page->getStatus();
         $dto->definition = $page->getDefinition();
         $dto->created = date('Y-m-d H:i:s', (int)$page->getUuid()->getTime());
 

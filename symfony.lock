@@ -41,6 +41,9 @@
             ".php_cs.dist"
         ]
     },
+    "guzzle/guzzle": {
+        "version": "v3.8.0"
+    },
     "jmose/command-scheduler-bundle": {
         "version": "2.0",
         "recipe": {
@@ -101,6 +104,9 @@
     },
     "phar-io/version": {
         "version": "3.1.0"
+    },
+    "php": {
+        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.1"
@@ -202,6 +208,9 @@
     },
     "symfony/dom-crawler": {
         "version": "v5.2.4"
+    },
+    "symfony/expression-language": {
+        "version": "v5.2.10"
     },
     "symfony/form": {
         "version": "v5.2.5"

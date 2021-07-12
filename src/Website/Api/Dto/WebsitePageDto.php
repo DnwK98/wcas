@@ -11,6 +11,7 @@ class WebsitePageDto implements JsonSerializable
 {
     public string $id;
     public string $path;
+    public string $status;
     public string $created;
 
     public static function fromEntity(WebsitePage $page): self
@@ -18,6 +19,7 @@ class WebsitePageDto implements JsonSerializable
         $dto = new self();
         $dto->id = (string)$page->getId();
         $dto->path = $page->getPath();
+        $dto->status = $page->getStatus();
         $dto->created = date('Y-m-d H:i:s', (int)$page->getUuid()->getTime());
 
         return $dto;

@@ -16,7 +16,7 @@ trait UuidTrait
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator("App\Common\Doctrine\Uuid\UuidGenerator")
      */
-    protected ?string $id;
+    protected ?string $id = null;
 
     public function getId(): ?string
     {

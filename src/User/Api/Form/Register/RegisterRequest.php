@@ -30,7 +30,7 @@ class RegisterRequest
     public string $passwordVerify;
 
     /**
-     * @Assert\IsTrue (message="Passwords must be equals", groups="passwordVerify")
+     * @Assert\IsTrue(message="Passwords must be equals", groups="passwordVerify")
      */
     public function isVerifiedPasswordEqualsToPassword()
     {
