@@ -27,13 +27,13 @@ class HtmlComponent extends AbstractComponent
     {
         switch ($this->textAlign) {
             case 'center':
-                return "text-center";
+                return 'text-center';
             case 'right':
-                return "text-end";
+                return 'text-end';
             case 'justify':
-                return "text-justify";
+                return 'text-justify';
             default:
-                return "";
+                return '';
         }
     }
 
@@ -47,7 +47,7 @@ class HtmlComponent extends AbstractComponent
         return [
             'name' => 'HtmlComponent',
             'content' => $this->content,
-            'textAlign' => $this->textAlign
+            'textAlign' => $this->textAlign,
         ];
     }
 }

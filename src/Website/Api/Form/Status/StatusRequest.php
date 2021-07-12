@@ -14,6 +14,4 @@ class StatusRequest
      * @Assert\NotBlank
      */
     public string $status;
-
 }
-

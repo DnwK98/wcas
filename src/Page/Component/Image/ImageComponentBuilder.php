@@ -2,25 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Page\Component\Html;
+
+namespace App\Page\Component\Image;
+
 
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\AbstractComponent;
 use App\Page\Component\ComponentBuilderInterface;
 use App\Page\Component\ComponentBuilderProvider;
 
-class HtmlComponentBuilder implements ComponentBuilderInterface
+class ImageComponentBuilder implements ComponentBuilderInterface
 {
     public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent
     {
-        $component = new HtmlComponent($json->getString('content', ''));
-        $component->setTextAlign($json->getString('textAlign', ''));
+        $component = new ImageComponent();
+        $component->setImage($json->getString('image', ''));
 
         return $component;
     }
 
     public function getComponentName(): string
     {
-        return 'HtmlComponent';
+        return 'ImageComponent';
     }
 }

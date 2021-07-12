@@ -107,13 +107,14 @@ class WebsiteController extends ApiController
         $website = new Website();
         $website->setUrl($data->url);
         $website->setOwner($this->getUser());
+        $website->getIndex();
         $this->websiteRepository->save($website);
 
         return new CreatedResponse($website->getId());
     }
 
     /**
-     * @Route("/api/website/{id}", methods={"GET"})
+     * @Route("/api/website/{id}", methods={"DELETE"})
      *
      * @param string $id
      *
@@ -136,7 +137,7 @@ class WebsiteController extends ApiController
     }
 
     /**
-     * @Route("/api/website/{id}/status", methods={"GET"})
+     * @Route("/api/website/{id}/status", methods={"POST"})
      *
      * @param Request $request
      * @param string $id

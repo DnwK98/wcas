@@ -20,9 +20,9 @@ class FormValidator
             foreach ($form->getErrors(true, false) as $a => $e) {
                 if ($e instanceof FormError) {
                     $errors['general'] = $e->getMessage();
-                } elseif ($e instanceof FormErrorIterator){
-                    foreach ($e as $child){
-                        if ($child instanceof FormError){
+                } elseif ($e instanceof FormErrorIterator) {
+                    foreach ($e as $child) {
+                        if ($child instanceof FormError) {
                             $errors[$e->getForm()->getName()] = $child->getMessage();
                             break;
                         }

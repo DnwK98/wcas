@@ -18,9 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Website
 {
-    const INDEX_PATH = 'index';
-
     use UuidTrait;
+    const INDEX_PATH = 'index';
 
     /**
      * @ORM\ManyToOne(targetEntity="App\User\Entity\User", cascade={"persist"}, fetch="EAGER")
@@ -43,7 +42,8 @@ class Website
      *     targetEntity="App\Website\Entity\WebsitePage",
      *     mappedBy="website",
      *     fetch="EXTRA_LAZY",
-     *     cascade={"persist", "remove"}
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
      * )
      */
     private $pages;
@@ -80,7 +80,7 @@ class Website
 
     public function setStatus(string $status): void
     {
-        if(!in_array($status, StatusEnum::list())){
+        if (!in_array($status, StatusEnum::list())) {
             throw new \LogicException('Invalid status');
         }
 
@@ -118,6 +118,13 @@ class Website
         }
     }
 
+    public function removePage(WebsitePage $page)
+    {
+        if ($this->hasPage($page)) {
+            $this->pages->removeElement($page);
+        }
+    }
+
     public function getPageById(string $id): ?WebsitePage
     {
         foreach ($this->pages as $p) {
@@ -132,7 +139,7 @@ class Website
     public function getIndex()
     {
         foreach ($this->pages as $p) {
-            if ($p->getPath() === self::INDEX_PATH) {
+            if (self::INDEX_PATH === $p->getPath()) {
                 return $p;
             }
         }

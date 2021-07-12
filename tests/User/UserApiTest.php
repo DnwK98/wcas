@@ -18,6 +18,7 @@ class UserApiTest extends FunctionalTestCase
             ->parameters([
                 'email' => 'test@example.com',
                 'password' => 'test-password',
+                'passwordVerify' => 'test-password',
             ])
             ->getResponse()
         );
