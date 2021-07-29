@@ -53,6 +53,21 @@ class WebsitePageApiTest extends FunctionalTestCase
         $this->assertEquals('PageComponent', $page->getDefinition()['name']);
     }
 
+    public function testDeletePage()
+    {
+        $page = $this->withPage();
+        $response = $this->request()
+            ->method('DELETE')
+            ->uri("/api/website/{$page->getWebsite()->getId()}/page/{$page->getId()}")
+            ->addHeader('Authorization', 'Bearer ' . $this->jwtToken())
+            ->getResponse();
+
+        $json = JsonObject::ofJson($response);
+
+        $this->assertEquals(OkResponse::STATUS, $json->getInt('status'));
+        $this->assertEmpty($page->getWebsite()->getPages()->toArray());
+    }
+
     public function testGetPage()
     {
         $page = $this->withPage();

@@ -9,11 +9,15 @@ use App\Common\Doctrine\Collection\Collection;
 use App\Common\Form\FormValidator;
 use App\Common\Response\BadRequestResponse;
 use App\Common\Response\CreatedResponse;
+use App\Common\Response\ForbiddenResponse;
+use App\Common\Response\NotFoundResponse;
 use App\Common\Response\ObjectResponse;
 use App\Domain\Api\Dto\DomainDto;
+use App\Domain\Api\Dto\DomainVerificationDto;
 use App\Domain\Api\Form\DomainForm;
 use App\Domain\Api\Form\DomainRequest;
 use App\Domain\DomainValidator;
+use App\Domain\DomainVerifier;
 use App\Domain\Entity\Domain;
 use App\Domain\Entity\Repository\DomainRepository;
 use App\User\UserPermissionService;
@@ -81,5 +85,25 @@ class DomainController extends ApiController
         $this->domainRepository->save($domain);
 
         return new CreatedResponse($domain->getId());
+    }
+
+    /**
+     * @Route("/api/domain/{id}/verification", methods={"GET"})
+     *
+     * @param string $id
+     *
+     * @return JsonResponse
+     */
+    public function domainVerification(string $id): JsonResponse
+    {
+        $domain = $this->domainRepository->find($id);
+        if(null === $domain){
+            return new NotFoundResponse();
+        }
+        if(!$this->userPermission->hasAccessToObject($this->getUser(), $domain->getOwner())){
+            return new ForbiddenResponse();
+        }
+
+        return new ObjectResponse(DomainVerificationDto::Create($domain, ['192.168.0.1']));
     }
 }

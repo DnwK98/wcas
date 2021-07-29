@@ -47,13 +47,14 @@ class SchedulerRunCommand extends Command
 
         while (true) {
             $now = microtime(true);
-            usleep((int)((60 - ($now % 60) + (int)$now - $now) * 1e6));
+
 
             if (null !== $pidFile && !file_exists($pidFile)) {
                 break;
             }
 
             $command->run($input, $output);
+            usleep((int)((60 - ($now % 60) + (int)$now - $now) * 1e6));
         }
     }
 
