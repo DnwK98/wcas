@@ -11,6 +11,10 @@ security:
                 class: App\User\Entity\User
                 property: email
     firewalls:
+        verification:
+            stateless: true
+            anonymous: true
+            pattern: ^/api/domain/verification
         auth:
             stateless: true
             anonymous: true

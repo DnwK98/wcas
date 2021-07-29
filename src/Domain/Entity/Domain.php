@@ -27,6 +27,11 @@ class Domain
      */
     private string $domain;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $verified = false;
+
     public function getOwner(): ?User
     {
         return $this->owner;
@@ -45,5 +50,15 @@ class Domain
     public function setDomain(string $domain): void
     {
         $this->domain = $domain;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): void
+    {
+        $this->verified = $verified;
     }
 }
