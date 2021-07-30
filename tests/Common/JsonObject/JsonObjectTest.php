@@ -8,9 +8,9 @@ namespace App\Tests\Common\JsonObject;
 
 use App\Common\JsonObject\Exception\JsonParseException;
 use App\Common\JsonObject\JsonObject;
-use PHPUnit\Framework\TestCase;
+use App\Tests\TestClass\UnitTestCase;
 
-class JsonObjectTest extends TestCase
+class JsonObjectTest extends UnitTestCase
 {
     public function testCreatesObjectFromJson()
     {

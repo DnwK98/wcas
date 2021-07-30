@@ -17,7 +17,7 @@ class WebsitePage
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Website\Entity\Website")
+     * @ORM\ManyToOne(targetEntity="App\Website\Entity\Website", inversedBy="pages")
      */
     private Website $website;
 

@@ -35,6 +35,9 @@ services:
     App\Website\Api\:
         resource: '../src/Website/Api/'
         tags: ['controller.service_arguments']
+    App\Serve\Controller\:
+        resource: '../src/Serve/Controller/'
+        tags: ['controller.service_arguments']
 
 
     # add more service definitions when explicit configuration is needed
@@ -51,3 +54,15 @@ services:
         public: true
         autoconfigure: true
         autowire: true
+
+    # Serve
+    App\Serve\Cache\StackedCache:
+        public: true
+        autoconfigure: true
+        autowire: true
+        arguments:
+            $stacked:
+                - '@App\Serve\Cache\ArrayCache'
+                - '@App\Serve\Cache\LocalCache'
+                - '@App\Serve\Cache\RedisCache'
+    App\Serve\Cache\CacheInterface: '@App\Serve\Cache\StackedCache'

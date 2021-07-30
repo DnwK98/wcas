@@ -17,7 +17,6 @@ use App\Domain\Api\Dto\DomainVerificationDto;
 use App\Domain\Api\Form\DomainForm;
 use App\Domain\Api\Form\DomainRequest;
 use App\Domain\DomainValidator;
-use App\Domain\DomainVerifier;
 use App\Domain\Entity\Domain;
 use App\Domain\Entity\Repository\DomainRepository;
 use App\User\UserPermissionService;
@@ -97,10 +96,10 @@ class DomainController extends ApiController
     public function domainVerification(string $id): JsonResponse
     {
         $domain = $this->domainRepository->find($id);
-        if(null === $domain){
+        if (null === $domain) {
             return new NotFoundResponse();
         }
-        if(!$this->userPermission->hasAccessToObject($this->getUser(), $domain->getOwner())){
+        if (!$this->userPermission->hasAccessToObject($this->getUser(), $domain->getOwner())) {
             return new ForbiddenResponse();
         }
 

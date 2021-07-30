@@ -136,6 +136,17 @@ class Website
         return null;
     }
 
+    public function getPageByPath(string $path): ?WebsitePage
+    {
+        foreach ($this->pages as $p) {
+            if ($p->getPath() === $path) {
+                return $p;
+            }
+        }
+
+        return null;
+    }
+
     public function getIndex()
     {
         foreach ($this->pages as $p) {
