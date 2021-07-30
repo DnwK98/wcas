@@ -23,7 +23,6 @@ class WebsitePageRequest
      */
     public ?string $definition = null;
 
-
     public function isValidJson(): bool
     {
         json_decode($this->definition ?? '');
@@ -34,8 +33,8 @@ class WebsitePageRequest
     public function isPathValid(): bool
     {
         $parts = explode('/', $this->path ?? '');
-        foreach ($parts as $part){
-            if(empty($part)){
+        foreach ($parts as $part) {
+            if (empty($part)) {
                 return false;
             }
         }

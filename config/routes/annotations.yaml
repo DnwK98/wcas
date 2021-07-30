@@ -10,3 +10,9 @@ user_api:
 website_api:
   resource: ../../src/Website/Api/
   type: annotation
+serve:
+  path: '{path}'
+  requirements:
+    path: .*
+  controller: 'App\Serve\Controller\ServeController::main'
+

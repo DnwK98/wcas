@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Domain;
-
 
 use App\Common\JsonObject\JsonObject;
 use App\Domain\Entity\Domain;

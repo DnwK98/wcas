@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Page\Component\Image;
-
 
 use App\Page\Component\AbstractComponent;
 

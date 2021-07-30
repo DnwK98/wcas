@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Domain\Api\Dto;
-
 
 use App\Domain\Entity\Domain;
 use JsonSerializable;
