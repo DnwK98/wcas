@@ -50,7 +50,6 @@ class UserController extends ApiController
     public function me(): JsonResponse
     {
         $user = $this->getUser();
-        $this->eventDispatcher->dispatch(new UserRemovalEvent($user));
         return new ObjectResponse(UserDto::fromEntity($user));
     }
 
