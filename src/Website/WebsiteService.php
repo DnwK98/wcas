@@ -7,6 +7,7 @@ namespace App\Website;
 
 
 use App\Common\Url\Url;
+use App\User\Entity\User;
 use App\Website\Api\Dto\WebsitePageDetailsDto;
 use App\Website\Entity\Repository\WebsiteRepository;
 
@@ -39,5 +40,10 @@ class WebsiteService
         }
 
         return WebsitePageDetailsDto::fromEntity($page);
+    }
+
+    public function removeUserWebsites(User $user)
+    {
+        $this->websiteRepository->removeUserWebsites($user->getId());
     }
 }

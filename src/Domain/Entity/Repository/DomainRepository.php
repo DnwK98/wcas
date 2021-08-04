@@ -69,4 +69,14 @@ class DomainRepository extends ServiceEntityRepository
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+    public function removeUserDomains(string $id)
+    {
+        $qb = $this->createQueryBuilder('d');
+        $qb->delete()
+            ->where($qb->expr()->eq('d.owner', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute();
+    }
 }

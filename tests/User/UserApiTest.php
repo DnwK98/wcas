@@ -85,9 +85,29 @@ class UserApiTest extends FunctionalTestCase
             ->getResponse()
         );
 
-        $this->assertTrue($response->isset('id'));
-        $this->assertTrue($response->isset('email'));
-        $this->assertTrue($response->isset('created'));
+        $this->assertTrue($response->isset('data.id'));
+        $this->assertTrue($response->isset('data.email'));
+        $this->assertTrue($response->isset('data.created'));
+    }
+
+    public function testChangePassword()
+    {
+        $user = $this->withUser();
+        $oldPassword = $user->getPassword();
+        $response = JsonObject::ofJson($this->request()
+            ->method('POST')
+            ->uri('/api/me/password')
+            ->addHeader('Authorization', 'Bearer ' . $this->jwtToken())
+            ->parameters([
+                'oldPassword' => 'password',
+                'newPassword' => 'new-password',
+                'newPasswordVerify' => 'new-password',
+            ])
+            ->getResponse()
+        );
+
+        $this->assertNotEquals($oldPassword, $user->getPassword());
+        $this->assertEquals(200, $response->getInt('status'));
     }
 
     public function testUserList()
