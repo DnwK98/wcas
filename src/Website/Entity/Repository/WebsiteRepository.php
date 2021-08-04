@@ -50,4 +50,14 @@ class WebsiteRepository extends ServiceEntityRepository
         $this->_em->remove($website);
         $this->_em->flush();
     }
+
+    public function removeUserWebsites(string $id)
+    {
+        $qb = $this->createQueryBuilder('w');
+        $qb->delete()
+            ->where($qb->expr()->eq('w.owner', ':id'))
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute();
+    }
 }

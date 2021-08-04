@@ -42,7 +42,7 @@ class Website
      *     targetEntity="App\Website\Entity\WebsitePage",
      *     mappedBy="website",
      *     fetch="EXTRA_LAZY",
-     *     cascade={"persist", "remove"},
+     *     cascade={"persist"},
      *     orphanRemoval=true
      * )
      */

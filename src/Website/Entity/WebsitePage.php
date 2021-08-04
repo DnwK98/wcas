@@ -18,6 +18,7 @@ class WebsitePage
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Website\Entity\Website", inversedBy="pages")
+     * @ORM\JoinColumn(name="website_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Website $website;
 
