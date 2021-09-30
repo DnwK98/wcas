@@ -24,6 +24,7 @@ class PageComponentBuilder implements ComponentBuilderInterface
         $component = new PageComponent($components);
         $component->setBackgroundColor($json->getString('backgroundColor', '#ffffff'));
         $component->setTextColor($json->getString('textColor', '#000000'));
+        $component->setTitle($json->getString('title', ''));
 
         return $component;
     }
