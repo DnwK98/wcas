@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Serve\Controller;
-
 
 use App\Common\Response\NotFoundResponse;
 use App\Serve\ServeService;
@@ -26,14 +24,10 @@ class ServeController extends AbstractController
         $url = $request->getHost() .  $request->getPathInfo();
         $content = $this->service->getUrlContent($url);
 
-        if(null === $content){
+        if (null === $content) {
             return new NotFoundResponse();
         }
 
         return new Response($content);
     }
-}
-
-{
-
 }

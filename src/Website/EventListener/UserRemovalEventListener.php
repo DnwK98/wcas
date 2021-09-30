@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Website\EventListener;
-
 
 use App\User\Event\UserRemovalEvent;
 use App\Website\WebsiteService;

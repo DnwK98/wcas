@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Domain\EventListener;
-
 
 use App\Domain\Entity\Repository\DomainRepository;
 use App\User\Event\UserRemovalEvent;

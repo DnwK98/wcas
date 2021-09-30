@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Common\Url;
-
 
 class Url
 {
@@ -86,17 +84,17 @@ class Url
     public function getUrl(): string
     {
         return implode('', [
-            $this->protocol !== '' ? $this->protocol . '://' : '',
+            ('' !== $this->protocol) ? $this->protocol . '://' : '',
             $this->domain,
             $this->path,
-            $this->query !== '' ? '?' . $this->query : ''
+            ('' !== $this->query) ? '?' . $this->query : '',
         ]);
     }
 
     public function getDomainWithProtocol(): string
     {
         return implode('', [
-            $this->protocol !== '' ? $this->protocol . '://' : '',
+            ('' !== $this->protocol) ? $this->protocol . '://' : '',
             $this->domain,
         ]);
     }
@@ -105,8 +103,7 @@ class Url
     {
         return implode('', [
             $this->path,
-            $this->query !== '' ? '?' . $this->query : ''
+            ('' !== $this->query) ? '?' . $this->query : '',
         ]);
     }
-
 }

@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FunctionalTestCase extends WebTestCase
+abstract class FunctionalTestCase extends WebTestCase
 {
     protected ?EntityManagerInterface $em;
     protected DataGenerator $dataGenerator;

@@ -17,3 +17,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
     tmpfs:
       - /var/lib/mysql
+
+  wcas-redis:
+    image: redis:alpine
+    container_name: "${APP_CONTAINER_NAME}_test_redis"

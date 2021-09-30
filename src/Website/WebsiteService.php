@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Website;
-
 
 use App\Common\Url\Url;
 use App\User\Entity\User;
@@ -24,18 +22,18 @@ class WebsiteService
     {
         $website = $this->websiteRepository->findOneBy(['url' => $url->getDomain()]);
 
-        if(null === $website) {
+        if (null === $website) {
             return null;
         }
 
         $path = ltrim($url->getPath(), ' /');
 
-        if('' === $path){
+        if ('' === $path) {
             return WebsitePageDetailsDto::fromEntity($website->getIndex());
         }
 
         $page = $website->getPageByPath($path);
-        if(null === $page){
+        if (null === $page) {
             return null;
         }
 

@@ -27,3 +27,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
     volumes:
       - ../docker/var/mysql_data:/var/lib/mysql
+
+  wcas-redis:
+    image: redis:alpine
+    container_name: "${APP_CONTAINER_NAME}_redis"
