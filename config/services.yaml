@@ -43,6 +43,18 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    # Common
+    monolog.formatter.application:
+        class: Monolog\Formatter\LineFormatter
+        arguments:
+            - "[%%datetime%%] [%%extra.username%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n"
+    App\Common\Log\SessionRequestProcessor:
+        tags:
+            - { name: monolog.processor }
+    App\Common\Log\UsernameProcessor:
+        tags:
+            - { name: monolog.processor }
+
     # Domain
     App\Domain\EventListener\UserRemovalEventListener:
         public: true
@@ -64,7 +76,8 @@ services:
         autowire: true
 
     # Serve
-    App\Serve\Cache\StackedCache:
+    App\Serve\Cache\CacheInterface:
+        class: App\Serve\Cache\StackedCache
         public: true
         autoconfigure: true
         autowire: true
@@ -73,7 +86,18 @@ services:
                 - '@App\Serve\Cache\ArrayCache'
                 - '@App\Serve\Cache\LocalCache'
                 - '@App\Serve\Cache\RedisCache'
-    App\Serve\Cache\CacheInterface: '@App\Serve\Cache\StackedCache'
+    App\Serve\Cache\RedisCache:
+        public: true
+        autoconfigure: true
+        autowire: true
+        arguments:
+            $redis: '@snc_redis.default'
+    App\Serve\Cache\LocalCache:
+        public: true
+        autoconfigure: true
+        autowire: true
+        arguments:
+            $redis: '@snc_redis.local'
 
     # Website
     App\Website\EventListener\UserRemovalEventListener:

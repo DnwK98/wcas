@@ -7,6 +7,8 @@ namespace App\Tests\Website;
 use App\Common\JsonObject\JsonObject;
 use App\Common\Response\CreatedResponse;
 use App\Common\Response\OkResponse;
+use App\Page\Component\Html\HtmlComponent;
+use App\Page\Component\Page\PageComponent;
 use App\Tests\TestClass\FunctionalTestCase;
 use App\Website\Entity\WebsitePage;
 

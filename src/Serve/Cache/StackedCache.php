@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-
 namespace App\Serve\Cache;
-
 
 class StackedCache implements CacheInterface
 {
     /** @var CacheInterface[] */
     private array $stacked;
-
 
     public function __construct(array $stacked)
     {
@@ -21,17 +18,18 @@ class StackedCache implements CacheInterface
     {
         /** @var CacheInterface[] $stack */
         $stack = [];
-        foreach ($this->stacked as $stackedItem){
+        foreach ($this->stacked as $stackedItem) {
             $stack[] = $stackedItem;
         }
 
         $executeFromStack = function ($self) use ($key, &$stack, $function) {
-            if(empty($stack)) {
+            if (empty($stack)) {
                 return $function();
             }
 
             $cache = array_shift($stack);
-            return $cache->getOrExecute($key, function () use ($key, $stack, $function, $self){
+
+            return $cache->getOrExecute($key, function () use ($self) {
                 return $self($self);
             });
         };

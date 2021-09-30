@@ -81,6 +81,9 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "monolog/monolog": {
+        "version": "2.3.4"
+    },
     "myclabs/deep-copy": {
         "version": "1.10.2"
     },
@@ -212,6 +215,18 @@
     "sebastian/version": {
         "version": "3.0.2"
     },
+    "snc/redis-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "85bbdb3d2db531e20874de29bab0587f93604fa8"
+        },
+        "files": [
+            "config/packages/snc_redis.yaml"
+        ]
+    },
     "symfony/asset": {
         "version": "v5.2.4"
     },
@@ -229,6 +244,24 @@
     },
     "symfony/intl": {
         "version": "v5.2.4"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v5.2.12"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.7",
+            "ref": "a7bace7dbc5a7ed5608dbe2165e0774c87175fe6"
+        },
+        "files": [
+            "config/packages/dev/monolog.yaml",
+            "config/packages/prod/deprecations.yaml",
+            "config/packages/prod/monolog.yaml",
+            "config/packages/test/monolog.yaml"
+        ]
     },
     "symfony/options-resolver": {
         "version": "v5.2.4"

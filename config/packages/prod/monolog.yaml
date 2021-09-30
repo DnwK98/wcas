@@ -1,0 +1,24 @@
+monolog:
+    handlers:
+        app_log:
+            type: filter
+            min_level: info
+            handler: nested
+            channels: ['app']
+
+        errors_log:
+            type: fingers_crossed
+            # if *one* log is error or higher, pass *all* to file_log
+            action_level: error
+            handler: nested
+
+        nested:
+            type: rotating_file
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            formatter: monolog.formatter.application
+            max_files: 60
+
+        console:
+            type: console
+            formatter: monolog.formatter.application
+

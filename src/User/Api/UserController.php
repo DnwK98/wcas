@@ -50,6 +50,7 @@ class UserController extends ApiController
     public function me(): JsonResponse
     {
         $user = $this->getUser();
+
         return new ObjectResponse(UserDto::fromEntity($user));
     }
 

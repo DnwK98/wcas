@@ -33,7 +33,6 @@ class PasswordRequest
      */
     public ?string $newPasswordVerify = '';
 
-
     public function isVerifiedPasswordEqualsToPassword(): bool
     {
         return $this->newPassword === $this->newPasswordVerify;

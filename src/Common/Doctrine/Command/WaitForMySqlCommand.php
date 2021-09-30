@@ -48,6 +48,6 @@ class WaitForMySqlCommand extends Command
         $output->writeln('[error] Timeout exceeded during waiting for MySql');
         $output->writeln($lastError->getMessage());
 
-        return 0;
+        return 1;
     }
 }
