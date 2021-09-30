@@ -46,9 +46,11 @@ class Url
         return $this->protocol;
     }
 
-    public function setProtocol(string $protocol): void
+    public function setProtocol(string $protocol): self
     {
         $this->protocol = $protocol;
+
+        return $this;
     }
 
     public function getDomain(): string
@@ -56,9 +58,11 @@ class Url
         return $this->domain;
     }
 
-    public function setDomain(string $domain): void
+    public function setDomain(string $domain): self
     {
         $this->domain = $domain;
+
+        return $this;
     }
 
     public function getPath(): string
@@ -66,9 +70,11 @@ class Url
         return $this->path;
     }
 
-    public function setPath(string $path): void
+    public function setPath(string $path): self
     {
         $this->path = $path;
+
+        return $this;
     }
 
     public function getQuery(): string
@@ -76,9 +82,19 @@ class Url
         return $this->query;
     }
 
-    public function setQuery(string $query): void
+    public function getQueryParameter(string $key): ?string
+    {
+        parse_str($this->query, $result);
+        $response = $result[$key] ?? null;
+
+        return is_string($response) ? $response : null;
+    }
+
+    public function setQuery(string $query): self
     {
         $this->query = $query;
+
+        return $this;
     }
 
     public function getUrl(): string

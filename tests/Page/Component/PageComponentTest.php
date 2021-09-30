@@ -61,6 +61,7 @@ class PageComponentTest extends FunctionalTestCase
             'name' => 'PageComponent',
             'backgroundColor' => '#cccccc',
             'textColor' => '#333333',
+            'title' => 'Test title',
             'children' => [
                 ['name' => 'NoneComponent'],
                 ['name' => 'NoneComponent'],

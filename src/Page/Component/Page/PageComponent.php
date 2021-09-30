@@ -10,6 +10,7 @@ use App\Page\Component\ComponentInputValidator;
 
 class PageComponent extends AbstractComponent
 {
+    private string $title = 'WCAS page';
     private string $backgroundColor = '#FFFFFF';
     private string $textColor = '#000000';
 
@@ -39,6 +40,11 @@ class PageComponent extends AbstractComponent
         }
     }
 
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
     public function render(): string
     {
         return $this->outputGet(function () {
@@ -50,6 +56,7 @@ class PageComponent extends AbstractComponent
     {
         return [
             'name' => 'PageComponent',
+            'title' => $this->title,
             'backgroundColor' => $this->backgroundColor,
             'textColor' => $this->textColor,
             'children' => Collection::Collect($this->children)
