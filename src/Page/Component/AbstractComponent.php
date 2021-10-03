@@ -21,7 +21,7 @@ abstract class AbstractComponent implements JsonSerializable
         return new BadRequestResponse([]);
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return $this->jsonSerialize();
     }
