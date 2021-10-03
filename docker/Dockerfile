@@ -14,6 +14,9 @@ RUN apt-get update \
     pcntl \
     posix \
     zip \
+ && pecl install -o -f redis \
+ && rm -rf /tmp/pear \
+ && docker-php-ext-enable redis \
  && a2enmod rewrite \
  && mkdir -p /var/vendor-build
 
@@ -21,7 +24,7 @@ RUN apt-get update \
 WORKDIR /var/vendor-build
 COPY ./composer.lock /var/vendor-build/composer.lock
 COPY ./composer.json /var/vendor-build/composer.json
-RUN composer install
+RUN composer install --no-scripts
 
 # Copy app files
 WORKDIR /var/www/html
