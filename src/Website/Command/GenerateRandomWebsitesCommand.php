@@ -21,13 +21,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 class GenerateRandomWebsitesCommand extends Command
 {
     protected static $defaultName = 'website:generate-random';
     private WebsiteRepository $websiteRepository;
     private UserRepository $userRepository;
-
 
     public function __construct(WebsiteRepository $websiteRepository, UserRepository $userRepository)
     {
@@ -51,11 +49,11 @@ class GenerateRandomWebsitesCommand extends Command
         $websites = (int)$input->getOption('websites');
         $components = (int)$input->getOption('components');
         $user = $this->userRepository->findOneByEmail((string)$input->getOption('owner'));
-        if(empty($user) || empty($domain)) {
-            throw new \InvalidArgumentException("User and domain are required");
+        if (empty($user) || empty($domain)) {
+            throw new \InvalidArgumentException('User and domain are required');
         }
 
-        for($i = 0; $i < $websites; ++$i) {
+        for ($i = 0; $i < $websites; ++$i) {
             $website = new Website();
             $website->setOwner($user);
             $website->setUrl($this->randomString(16) . '.' . $domain);
@@ -78,7 +76,7 @@ class GenerateRandomWebsitesCommand extends Command
 
     private function randomComponent($inner = 6): AbstractComponent
     {
-        $rand = rand(max(1, $inner - 3),$inner);
+        $rand = rand(max(1, $inner - 3), $inner);
 
         switch ($rand) {
             case 1:
@@ -86,11 +84,13 @@ class GenerateRandomWebsitesCommand extends Command
             case 2:
                 $c = new ImageComponent();
                 $c->setImage('data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7');
+
                 return $c;
             case 3:
                 $c = new BackgroundImageComponent();
                 $c->setContent($this->randomComponent($inner - 1));
                 $c->setBackgroundColor('#' . $this->randomString(6, '89ABCDEF'));
+
                 return $c;
             case 4:
                 return new TwoColumnsComponent(
@@ -102,6 +102,7 @@ class GenerateRandomWebsitesCommand extends Command
                 $c->setMarginBottom(MarginSize::SMALL);
                 $c->setMarginTop(MarginSize::SMALL);
                 $c->setMarginLeftRight(MarginSize::MEDIUM);
+
                 return $c;
             default:
                 return new ThreeColumnsComponent(
@@ -116,9 +117,10 @@ class GenerateRandomWebsitesCommand extends Command
     {
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
 }

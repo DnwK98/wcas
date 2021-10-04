@@ -4,7 +4,3 @@ snc_redis:
             type: phpredis
             alias: default
             dsn: "%env(REDIS_URL)%"
-        local:
-            type: phpredis
-            alias: local
-            dsn: "%env(REDIS_LOCAL_URL)%"

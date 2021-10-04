@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Common\Log;
 
-use App\Entity\User;
+use App\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UsernameProcessor

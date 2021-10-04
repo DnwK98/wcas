@@ -26,18 +26,18 @@ class ServeService
     public function getUrlContent(string $url): ?string
     {
         $url = rtrim($url, ' /');
-        $definition = $this->cache->getOrExecute($url, function () use ($url) {
+
+        return $this->cache->getOrExecute($url, function () use ($url) {
             $page = $this->websiteService->getPageForUrl(Url::fromString($url));
 
-            return $page ? json_encode($page->definition) : null;
+            $definition = $page ? json_encode($page->definition) : null;
+            if (null === $definition) {
+                return null;
+            }
+
+            return $this->pageBuilder
+                ->build(JsonObject::ofJson($definition))
+                ->render();
         });
-
-        if (null === $definition) {
-            return null;
-        }
-
-        return $this->pageBuilder
-            ->build(JsonObject::ofJson($definition))
-            ->render();
     }
 }

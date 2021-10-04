@@ -11,6 +11,8 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-redis": "*",
+        "amphp/cluster": "^1.0",
+        "amphp/http-server": "^2.1",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.12",
         "doctrine/doctrine-bundle": "^2.3",
