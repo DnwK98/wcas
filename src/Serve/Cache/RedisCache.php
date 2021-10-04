@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class RedisCache implements CacheInterface
 {
-    const TTL = 5 * 60;
+    const TTL = 3 * 60;
 
     private \Redis $redis;
     private LoggerInterface $log;

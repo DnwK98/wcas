@@ -41,8 +41,8 @@ clear_cache() {
 }
 
 run_web() {
-  # Start Apache
-  exec apache2-foreground
+  # Start web server
+  php bin/cluster server.php
 }
 
 run_scheduler() {

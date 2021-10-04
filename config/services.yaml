@@ -84,7 +84,6 @@ services:
         arguments:
             $stacked:
                 - '@App\Serve\Cache\ArrayCache'
-                - '@App\Serve\Cache\LocalCache'
                 - '@App\Serve\Cache\RedisCache'
     App\Serve\Cache\RedisCache:
         public: true
@@ -92,12 +91,6 @@ services:
         autowire: true
         arguments:
             $redis: '@snc_redis.default'
-    App\Serve\Cache\LocalCache:
-        public: true
-        autoconfigure: true
-        autowire: true
-        arguments:
-            $redis: '@snc_redis.local'
 
     # Website
     App\Website\EventListener\UserRemovalEventListener:
