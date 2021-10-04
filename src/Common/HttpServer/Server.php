@@ -6,6 +6,7 @@ namespace App\Common\HttpServer;
 
 use Amp\Cluster\Cluster;
 use Amp\Http\Server\HttpServer;
+use Amp\Http\Server\Options;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use Amp\Http\Server\Response;
@@ -58,6 +59,9 @@ class Server
                 Cluster::listen('[::]:' . $this->port),
             ];
 
+            $options = new Options();
+            $options = $options->withBodySizeLimit(254 * 1024 * 1024);
+
             /** @psalm-suppress InvalidArgument // yield resolves promise */
             $server = new HttpServer(
                 $sockets,
@@ -67,13 +71,14 @@ class Server
                     }
                     ++$this->kernelRequests;
 
-                    $content = yield $request->getBody()->read();
+                    $content = yield $request->getBody()->buffer();
                     $response = $this->handleRequest($request, (string)$content);
                     $this->garbageCollect();
 
                     return $response;
                 }),
-                new NullLogger()
+                new NullLogger(),
+                $options
             );
 
             yield $server->start();

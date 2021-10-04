@@ -14,7 +14,7 @@ class DomainRequest
      * @Assert\Length(min=5)
      * @Assert\Expression("this.isDomainValid()", message="Domain format is not valid")
      */
-    public string $domain;
+    public string $domain = '';
 
     public function isDomainValid(): bool
     {
