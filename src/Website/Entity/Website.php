@@ -138,6 +138,10 @@ class Website
 
     public function getPageByPath(string $path): ?WebsitePage
     {
+        if ('' === $path || 'index' === $path) {
+            return $this->getIndex();
+        }
+
         foreach ($this->pages as $p) {
             if ($p->getPath() === $path) {
                 return $p;

@@ -27,12 +27,8 @@ class WebsiteService
         }
 
         $path = ltrim($url->getPath(), ' /');
-
-        if ('' === $path) {
-            return WebsitePageDetailsDto::fromEntity($website->getIndex());
-        }
-
         $page = $website->getPageByPath($path);
+
         if (null === $page) {
             return null;
         }
