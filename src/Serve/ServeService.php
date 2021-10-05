@@ -28,7 +28,7 @@ class ServeService
         $url = rtrim($url, ' /');
 
         return $this->cache->getOrExecute($url, function () use ($url) {
-            $page = $this->websiteService->getPageForUrl(Url::fromString($url));
+            $page = $this->websiteService->getActivePageForUrl(Url::fromString($url));
 
             $definition = $page ? json_encode($page->definition) : null;
             if (null === $definition) {

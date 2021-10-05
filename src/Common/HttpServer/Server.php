@@ -49,7 +49,7 @@ class Server
 
     public function run()
     {
-        if(!gc_enabled()) {
+        if (!gc_enabled()) {
             gc_enable();
         }
 

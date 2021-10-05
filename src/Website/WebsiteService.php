@@ -18,7 +18,7 @@ class WebsiteService
         $this->websiteRepository = $websiteRepository;
     }
 
-    public function getPageForUrl(Url $url): ?WebsitePageDetailsDto
+    public function getActivePageForUrl(Url $url): ?WebsitePageDetailsDto
     {
         $website = $this->websiteRepository->findOneBy(['url' => $url->getDomain()]);
 
@@ -34,6 +34,10 @@ class WebsiteService
 
         $page = $website->getPageByPath($path);
         if (null === $page) {
+            return null;
+        }
+
+        if (StatusEnum::INACTIVE === $page->getStatus() || StatusEnum::INACTIVE === $website->getStatus()) {
             return null;
         }
 
