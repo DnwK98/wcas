@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Common\Log;
-
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -13,7 +11,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class AccessLogEventSubscriber implements EventSubscriberInterface
 {
-
     private LoggerInterface $log;
 
     public function __construct(LoggerInterface $log)
@@ -37,7 +34,7 @@ class AccessLogEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE => 'onKernelResponse'
+            KernelEvents::RESPONSE => 'onKernelResponse',
         ];
     }
 }
