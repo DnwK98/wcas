@@ -12,6 +12,7 @@ use Amp\Http\Server\RequestHandler\CallableRequestHandler;
 use Amp\Http\Server\Response;
 use Amp\Loop;
 use App\Kernel;
+use DateTimeImmutable;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
@@ -20,6 +21,7 @@ class Server
     private int $port = 80;
     private ?Kernel $kernel = null;
     private int $kernelRequests = 0;
+    private ?DateTimeImmutable $kernelCreated;
     private int $requestsPerGC = 500;
     private array $serverGlobals = [];
 
@@ -138,17 +140,26 @@ class Server
 
     private function buildKernel(): Kernel
     {
+        $this->kernelRequests = 0;
+        $this->kernelCreated = new DateTimeImmutable();
         return new Kernel($this->serverGlobals['APP_ENV'], (bool)$this->serverGlobals['APP_DEBUG']);
     }
 
     private function garbageCollect()
     {
-        if ($this->kernelRequests > $this->requestsPerGC) {
-            $this->kernel->shutdown();
-            $this->kernel = null;
-            $this->kernelRequests = 0;
-
-            gc_collect_cycles();
+        if (!$this->kernelRequests > $this->requestsPerGC) {
+            return;
         }
+
+        if($this->kernelCreated && !date_create('-5 minutes')->getTimestamp() > $this->kernelCreated->getTimestamp()) {
+            return;
+        }
+
+        $this->kernel->shutdown();
+        $this->kernel = null;
+        $this->kernelRequests = 0;
+        $this->kernelCreated = null;
+
+        gc_collect_cycles();
     }
 }
