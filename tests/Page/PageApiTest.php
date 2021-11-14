@@ -49,6 +49,6 @@ class PageApiTest extends FunctionalTestCase
             ->addHeader('Authorization', 'Bearer ' . $this->jwtToken())
             ->getResponse();
 
-        $this->assertStringContainsString('Bad Request', $response);
+        $this->assertStringContainsString('Your request is invalid', $response);
     }
 }

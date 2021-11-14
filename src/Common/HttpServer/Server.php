@@ -142,6 +142,7 @@ class Server
     {
         $this->kernelRequests = 0;
         $this->kernelCreated = new DateTimeImmutable();
+
         return new Kernel($this->serverGlobals['APP_ENV'], (bool)$this->serverGlobals['APP_DEBUG']);
     }
 
@@ -151,7 +152,7 @@ class Server
             return;
         }
 
-        if($this->kernelCreated && !date_create('-5 minutes')->getTimestamp() > $this->kernelCreated->getTimestamp()) {
+        if ($this->kernelCreated && !date_create('-5 minutes')->getTimestamp() > $this->kernelCreated->getTimestamp()) {
             return;
         }
 

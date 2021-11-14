@@ -6,12 +6,12 @@ namespace App\Page\Component\Margins;
 
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentBuilderInterface;
-use App\Page\Component\ComponentBuilderProvider;
+use App\Page\Component\ComponentFactoryInterface;
+use App\Page\Component\ComponentFactoryProvider;
 
-class MarginsComponentBuilder implements ComponentBuilderInterface
+class MarginsComponentFactory implements ComponentFactoryInterface
 {
-    public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent
+    public function build(ComponentFactoryProvider $provider, JsonObject $json): AbstractComponent
     {
         $contentComponent = $provider
             ->provide($json->getString('content.name', 'NoneComponent'))

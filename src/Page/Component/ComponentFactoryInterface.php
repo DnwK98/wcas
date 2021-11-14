@@ -6,9 +6,9 @@ namespace App\Page\Component;
 
 use App\Common\JsonObject\JsonObject;
 
-interface ComponentBuilderInterface
+interface ComponentFactoryInterface
 {
-    public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent;
+    public function build(ComponentFactoryProvider $provider, JsonObject $json): AbstractComponent;
 
     public function getComponentName(): string;
 }

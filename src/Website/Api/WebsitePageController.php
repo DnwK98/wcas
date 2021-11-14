@@ -14,7 +14,7 @@ use App\Common\Response\ForbiddenResponse;
 use App\Common\Response\NotFoundResponse;
 use App\Common\Response\ObjectResponse;
 use App\Common\Response\OkResponse;
-use App\Page\PageBuilder;
+use App\Page\PageFactory;
 use App\User\UserPermissionService;
 use App\Website\Api\Dto\WebsitePageDetailsDto;
 use App\Website\Api\Dto\WebsitePageDto;
@@ -33,15 +33,15 @@ class WebsitePageController extends ApiController
 {
     private UserPermissionService $userPermission;
     private WebsiteRepository $websiteRepository;
-    private PageBuilder $pageBuilder;
+    private PageFactory $pageFactory;
 
     public function __construct(UserPermissionService $userPermission,
                                 WebsiteRepository $websiteRepository,
-                                PageBuilder $pageBuilder)
+                                PageFactory $pageFactory)
     {
         $this->userPermission = $userPermission;
         $this->websiteRepository = $websiteRepository;
-        $this->pageBuilder = $pageBuilder;
+        $this->pageFactory = $pageFactory;
     }
 
     /**
@@ -270,7 +270,7 @@ class WebsitePageController extends ApiController
     {
         $page->setPath($data->path);
         $page->setDefinition(
-            $this->pageBuilder
+            $this->pageFactory
                 ->build(JsonObject::ofJson($data->definition))
                 ->toArray()
         );

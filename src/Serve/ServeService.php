@@ -6,7 +6,7 @@ namespace App\Serve;
 
 use App\Common\JsonObject\JsonObject;
 use App\Common\Url\Url;
-use App\Page\PageBuilder;
+use App\Page\PageFactory;
 use App\Serve\Cache\CacheInterface;
 use App\Website\WebsiteService;
 
@@ -14,13 +14,13 @@ class ServeService
 {
     private CacheInterface $cache;
     private WebsiteService $websiteService;
-    private PageBuilder $pageBuilder;
+    private PageFactory $pageFactory;
 
-    public function __construct(CacheInterface $cache, WebsiteService $websiteService, PageBuilder $pageBuilder)
+    public function __construct(CacheInterface $cache, WebsiteService $websiteService, PageFactory $pageFactory)
     {
         $this->cache = $cache;
         $this->websiteService = $websiteService;
-        $this->pageBuilder = $pageBuilder;
+        $this->pageFactory = $pageFactory;
     }
 
     public function getUrlContent(string $url): ?string
@@ -35,7 +35,7 @@ class ServeService
                 return null;
             }
 
-            return $this->pageBuilder
+            return $this->pageFactory
                 ->build(JsonObject::ofJson($definition))
                 ->render();
         });
