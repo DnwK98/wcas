@@ -6,12 +6,12 @@ namespace App\Page\Component\Html;
 
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\AbstractComponent;
-use App\Page\Component\ComponentBuilderInterface;
-use App\Page\Component\ComponentBuilderProvider;
+use App\Page\Component\ComponentFactoryInterface;
+use App\Page\Component\ComponentFactoryProvider;
 
-class HtmlComponentBuilder implements ComponentBuilderInterface
+class HtmlComponentFactory implements ComponentFactoryInterface
 {
-    public function build(ComponentBuilderProvider $provider, JsonObject $json): AbstractComponent
+    public function build(ComponentFactoryProvider $provider, JsonObject $json): AbstractComponent
     {
         $component = new HtmlComponent($json->getString('content', ''));
         $component->setTextAlign($json->getString('textAlign', ''));

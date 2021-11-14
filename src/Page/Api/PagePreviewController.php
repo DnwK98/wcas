@@ -6,20 +6,20 @@ namespace App\Page\Api;
 
 use App\Common\JsonObject\Exception\JsonParseException;
 use App\Common\JsonObject\JsonObject;
-use App\Page\PageBuilder;
+use App\Common\Response\BadRequestResponse;
+use App\Page\PageFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PagePreviewController extends AbstractController
 {
-    private PageBuilder $pageBuilder;
+    private PageFactory $pageFactory;
 
-    public function __construct(PageBuilder $pageBuilder)
+    public function __construct(PageFactory $pageFactory)
     {
-        $this->pageBuilder = $pageBuilder;
+        $this->pageFactory = $pageFactory;
     }
 
     /**
@@ -35,10 +35,12 @@ class PagePreviewController extends AbstractController
         try {
             $pageJson = JsonObject::ofJson($request->getContent());
         } catch (JsonParseException $e) {
-            return new JsonResponse(['status' => 'Bad Request'], JsonResponse::HTTP_BAD_REQUEST);
+            return new BadRequestResponse([
+                'body' => 'Is not valid JSON',
+            ]);
         }
 
-        $page = $this->pageBuilder->build($pageJson);
+        $page = $this->pageFactory->build($pageJson);
 
         return new Response($page->render());
     }

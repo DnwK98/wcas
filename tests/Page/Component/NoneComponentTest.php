@@ -4,19 +4,19 @@
 namespace App\Tests\Page\Component;
 
 use App\Common\JsonObject\JsonObject;
-use App\Page\Component\ComponentBuilderProvider;
+use App\Page\Component\ComponentFactoryProvider;
 use App\Page\Component\None\NoneComponent;
 use App\Tests\TestClass\FunctionalTestCase;
 
 class NoneComponentTest extends FunctionalTestCase
 {
-    protected ComponentBuilderProvider $provider;
+    protected ComponentFactoryProvider $provider;
 
     public function setUp(): void
     {
         parent::setUp();
-        /** @var ComponentBuilderProvider $provider */
-        $provider = $this->container()->get(ComponentBuilderProvider::class);
+        /** @var ComponentFactoryProvider $provider */
+        $provider = $this->container()->get(ComponentFactoryProvider::class);
         $this->provider = $provider;
     }
 

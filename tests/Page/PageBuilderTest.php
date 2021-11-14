@@ -7,22 +7,22 @@ namespace App\Tests\Page;
 use App\Common\JsonObject\JsonObject;
 use App\Page\Component\None\NoneComponent;
 use App\Page\Component\Page\PageComponent;
-use App\Page\PageBuilder;
+use App\Page\PageFactory;
 use App\Tests\TestClass\FunctionalTestCase;
 
-class PageBuilderTest extends FunctionalTestCase
+class PageFactoryTest extends FunctionalTestCase
 {
-    private PageBuilder $pageBuilder;
+    private PageFactory $pageFactory;
 
     public function setUp(): void
     {
         parent::setUp();
-        /** @var PageBuilder $pageBuilder */
-        $pageBuilder = $this->container()->get(PageBuilder::class);
-        $this->pageBuilder = $pageBuilder;
+        /** @var PageFactory $pageFactory */
+        $pageFactory = $this->container()->get(PageFactory::class);
+        $this->pageFactory = $pageFactory;
     }
 
-    public function testPageBuilderBuildsPageObject()
+    public function testPageFactoryBuildsPageObject()
     {
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
@@ -32,12 +32,12 @@ class PageBuilderTest extends FunctionalTestCase
             ],
         ]);
 
-        $builtPage = $this->pageBuilder->build($json);
+        $builtPage = $this->pageFactory->build($json);
 
         $this->assertInstanceOf(PageComponent::class, $builtPage);
     }
 
-    public function testPageBuilderBuildsNothingOnInvalidJson()
+    public function testPageFactoryBuildsNothingOnInvalidJson()
     {
         $json = JsonObject::ofArray([
             'when-name-missing-component-is-invalid' => 'PageComponent',
@@ -47,7 +47,7 @@ class PageBuilderTest extends FunctionalTestCase
             ],
         ]);
 
-        $builtPage = $this->pageBuilder->build($json);
+        $builtPage = $this->pageFactory->build($json);
 
         $this->assertInstanceOf(NoneComponent::class, $builtPage);
     }
@@ -63,12 +63,12 @@ class PageBuilderTest extends FunctionalTestCase
             ],
         ]);
 
-        $builtPage = $this->pageBuilder->build($json);
+        $builtPage = $this->pageFactory->build($json);
 
         $this->assertInstanceOf(PageComponent::class, $builtPage);
     }
 
-    public function testPageBuilderWorksWithNestedModel()
+    public function testPageFactoryWorksWithNestedModel()
     {
         $json = JsonObject::ofArray([
             'name' => 'PageComponent',
@@ -87,7 +87,7 @@ class PageBuilderTest extends FunctionalTestCase
             ],
         ]);
 
-        $builtPage = $this->pageBuilder->build($json);
+        $builtPage = $this->pageFactory->build($json);
 
         $this->assertInstanceOf(PageComponent::class, $builtPage);
 //        $this->assertEquals($json->getArray(), $builtPage->jsonSerialize());
