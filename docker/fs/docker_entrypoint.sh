@@ -8,6 +8,7 @@ main() {
   clear_cache
 
   [ "$app_type" == "web" ] && run_web
+  [ "$app_type" == "web_old" ] && run_web_old
   [ "$app_type" == "scheduler" ] && run_scheduler
   [ "$app_type" == "test" ] && run_test
   [ "$app_type" == "maintainer" ] && run_maintainer
@@ -43,6 +44,11 @@ clear_cache() {
 run_web() {
   # Start web server
   php bin/cluster server.php
+}
+
+run_web_old() {
+  # Start Apache
+  exec apache2-foreground
 }
 
 run_scheduler() {
